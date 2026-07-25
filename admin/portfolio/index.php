@@ -48,6 +48,18 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <div class="table-responsive">
 
+                <?php if(isset($_SESSION['success'])): ?>
+
+<div class="alert alert-success">
+
+<?= $_SESSION['success']; ?>
+
+</div>
+
+<?php unset($_SESSION['success']); ?>
+
+<?php endif; ?>
+
                 <table class="table table-bordered table-hover align-middle">
 
                     <thead class="table-dark">

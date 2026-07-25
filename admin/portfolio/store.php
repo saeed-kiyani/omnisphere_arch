@@ -156,6 +156,71 @@ $stmt->execute([
 
 $portfolio_id = $pdo->lastInsertId();
 
+// =====================================
+// Upload Gallery Images
+// =====================================
+
+if (!empty($_FILES['gallery']['name'][0])) {
+
+    $allowed = ['jpg','jpeg','png','webp'];
+
+    foreach ($_FILES['gallery']['tmp_name'] as $key => $tmpName) {
+
+        if (empty($tmpName)) {
+            continue;
+        }
+
+        $fileName = $_FILES['gallery']['name'][$key];
+
+        $fileSize = $_FILES['gallery']['size'][$key];
+
+        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+        if (!in_array($extension, $allowed)) {
+            continue;
+        }
+
+        if ($fileSize > 2 * 1024 * 1024) {
+            continue;
+        }
+
+        $newName = time() . "_" . uniqid() . "." . $extension;
+
+        move_uploaded_file(
+            $tmpName,
+            "../../uploads/portfolio/" . $newName
+        );
+
+        $stmt = $pdo->prepare("
+        INSERT INTO portfolio_images
+        (
+            portfolio_id,
+            image,
+            alt_text,
+            display_order
+        )
+        VALUES
+        (
+            ?,?,?,?
+        )
+        ");
+
+        $stmt->execute([
+
+            $portfolio_id,
+
+            $newName,
+
+            '',
+
+            $key + 1
+
+        ]);
+
+    }
+
+}
+
 $_SESSION['success'] = "Portfolio project created successfully.";
 
 header("Location: index.php");

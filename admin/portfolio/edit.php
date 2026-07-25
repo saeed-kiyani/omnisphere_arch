@@ -34,7 +34,6 @@ if (!$project) {
 $stmt = $pdo->query("
 SELECT id, title
 FROM services
-WHERE status='Published'
 ORDER BY title ASC
 ");
 
@@ -42,12 +41,21 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 include '../includes/header.php';
 include '../includes/sidebar.php';
+include '../includes/topbar.php';
 
 ?>
 
 <div class="container-fluid mt-4">
 
-<h2>Edit Portfolio Project</h2>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>Edit Portfolio Project</h2>
+
+        <a href="index.php" class="btn btn-secondary">
+            ← Back
+        </a>
+
+    </div>
 
 <hr>
 
@@ -153,6 +161,45 @@ name="project_year"
 class="form-control"
 value="<?= $project['project_year']; ?>">
 
+</div>
+
+<div class="mb-3">
+
+<label>Project Area</label>
+
+<input
+type="text"
+name="project_area"
+class="form-control"
+value="<?= htmlspecialchars($project['project_area']); ?>">
+
+</div>
+
+<select name="project_status" class="form-control">
+
+<option value="Concept"
+<?= $project['project_status']=="Concept" ? "selected" : ""; ?>>
+
+Concept
+
+</option>
+
+<option value="In Progress"
+<?= $project['project_status']=="In Progress" ? "selected" : ""; ?>>
+
+In Progress
+
+</option>
+
+<option value="Completed"
+<?= $project['project_status']=="Completed" ? "selected" : ""; ?>>
+
+Completed
+
+</option>
+
+</select>
+
 <div class="mb-3">
 
 <label>Current Thumbnail</label>
@@ -184,15 +231,31 @@ class="form-control">
 
 </div>
 
+<div class="mb-3">
+
+<label>Short Description</label>
+
 <textarea
 name="short_description"
 class="form-control"
 rows="4"><?= htmlspecialchars($project['short_description']); ?></textarea>
 
+</div>
+
+<div class="mb-3">
+
+<label>Description</label>
+
 <textarea
 name="description"
 class="form-control"
 rows="8"><?= htmlspecialchars($project['description']); ?></textarea>
+
+</div>
+
+<div class="mb-3">
+
+<label>Meta Title</label>
 
 <input
 type="text"
@@ -200,20 +263,39 @@ name="meta_title"
 class="form-control"
 value="<?= htmlspecialchars($project['meta_title']); ?>">
 
+</div>
+
+<div class="mb-3">
+
+<label>Meta Description</label>
+
 <textarea
 name="meta_description"
 class="form-control"
 rows="4"><?= htmlspecialchars($project['meta_description']); ?></textarea>
 
+</div>
+
+<div class="mb-3 form-check">
+
 <input
 type="checkbox"
+class="form-check-input"
 name="featured"
 value="1"
+<?= $project['featured'] ? 'checked' : ''; ?>>
 
-<?= $project['featured'] ? 'checked' : ''; ?>
+<label class="form-check-label">
 
->
 Featured Project
+
+</label>
+
+</div>
+
+<div class="mb-3">
+
+<label>Status</label>
 
 <select
 name="status"
@@ -247,6 +329,8 @@ Draft
 
 </select>
 
+</div>
+
 <div class="mt-4">
 
 <button
@@ -270,5 +354,26 @@ Cancel
 </form>
 
 </div>
+
+<script>
+
+function slugify(text){
+
+return text
+.toLowerCase()
+.trim()
+.replace(/[^\w\s-]/g,'')
+.replace(/\s+/g,'-')
+.replace(/-+/g,'-');
+
+}
+
+document.getElementById("title").addEventListener("keyup",function(){
+
+document.getElementById("slug").value=slugify(this.value);
+
+});
+
+</script>
 
 <?php include '../includes/footer.php'; ?>
