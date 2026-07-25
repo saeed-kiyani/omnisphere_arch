@@ -3,25 +3,15 @@
 require_once '../../config/config.php';
 require_once '../includes/auth-check.php';
 
-$pageTitle = "Blog";
+$pageTitle = "Blog Categories";
 
 $sql = "
-SELECT
-
-blog.*,
-
-blog_categories.title AS category_name
-
-FROM blog
-
-LEFT JOIN blog_categories
-
-ON blog.category_id = blog_categories.id
-
-ORDER BY blog.id DESC
+SELECT *
+FROM blog_categories
+ORDER BY display_order ASC, id DESC
 ";
 
-$blogs = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$categories = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 include '../includes/header.php';
 include '../includes/sidebar.php';
@@ -35,13 +25,13 @@ include '../includes/topbar.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-<h2>Blog Posts</h2>
+<h2>Blog Categories</h2>
 
 <a href="create.php" class="btn btn-primary">
 
 <i class="bi bi-plus-circle"></i>
 
-Add New Blog
+Add New Category
 
 </a>
 
@@ -67,19 +57,15 @@ Add New Blog
 
 <tr>
 
-<th width="80">Image</th>
-
-<th>Title</th>
+<th width="70">ID</th>
 
 <th>Category</th>
 
-<th>Author</th>
+<th>Slug</th>
+
+<th>Display Order</th>
 
 <th>Status</th>
-
-<th>Featured</th>
-
-<th>Views</th>
 
 <th width="180">Action</th>
 
@@ -89,26 +75,15 @@ Add New Blog
 
 <tbody>
 
-<?php if(count($blogs)>0): ?>
+<?php if(count($categories)>0): ?>
 
-<?php foreach($blogs as $row): ?>
+<?php foreach($categories as $row): ?>
 
 <tr>
 
 <td>
 
-<?php if(!empty($row['thumbnail'])): ?>
-
-<img
-src="../../uploads/blog/<?= htmlspecialchars($row['thumbnail']); ?>"
-width="70"
-class="img-thumbnail">
-
-<?php else: ?>
-
-—
-
-<?php endif; ?>
+<?= $row['id']; ?>
 
 </td>
 
@@ -120,25 +95,17 @@ class="img-thumbnail">
 
 </strong>
 
-<br>
+</td>
 
-<small class="text-muted">
+<td>
 
 <?= htmlspecialchars($row['slug']); ?>
 
-</small>
-
 </td>
 
 <td>
 
-<?= htmlspecialchars($row['category_name']); ?>
-
-</td>
-
-<td>
-
-<?= htmlspecialchars($row['author']); ?>
+<?= (int)$row['display_order']; ?>
 
 </td>
 
@@ -166,18 +133,6 @@ Draft
 
 <td>
 
-<?= $row['featured'] ? 'Yes' : 'No'; ?>
-
-</td>
-
-<td>
-
-<?= (int)$row['views']; ?>
-
-</td>
-
-<td>
-
 <a
 href="edit.php?id=<?= $row['id']; ?>"
 class="btn btn-warning btn-sm">
@@ -189,7 +144,7 @@ Edit
 <a
 href="delete.php?id=<?= $row['id']; ?>"
 class="btn btn-danger btn-sm"
-onclick="return confirm('Delete this blog?')">
+onclick="return confirm('Delete this category?')">
 
 Delete
 
@@ -205,9 +160,9 @@ Delete
 
 <tr>
 
-<td colspan="7" class="text-center">
+<td colspan="6" class="text-center">
 
-No blog posts found.
+No blog categories found.
 
 </td>
 

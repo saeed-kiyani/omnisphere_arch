@@ -3,7 +3,7 @@
 require_once '../../config/config.php';
 require_once '../includes/auth-check.php';
 
-$pageTitle = "Add New Blog";
+$pageTitle = "Add Blog Category";
 
 include '../includes/header.php';
 include '../includes/sidebar.php';
@@ -17,7 +17,7 @@ include '../includes/topbar.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-<h2>Add New Blog</h2>
+<h2>Add Blog Category</h2>
 
 <a href="index.php" class="btn btn-secondary">
 Back
@@ -27,60 +27,16 @@ Back
 
 <form
 action="store.php"
-method="POST"
-enctype="multipart/form-data">
+method="POST">
 
-<?php
-
-$stmt = $pdo->query("
-SELECT id, title
-FROM blog_categories
-ORDER BY display_order ASC, title ASC
-");
-
-$categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-?>
+<!-- Category Title -->
 
 <div class="mb-3">
 
 <label class="form-label">
 
-Category *
+Category Title *
 
-</label>
-
-<select
-name="category_id"
-class="form-control"
-required>
-
-<option value="">
-
-Select Category
-
-</option>
-
-<?php foreach($categories as $category): ?>
-
-<option value="<?= $category['id']; ?>">
-
-<?= htmlspecialchars($category['title']); ?>
-
-</option>
-
-<?php endforeach; ?>
-
-</select>
-
-</div>
-
-<!-- Blog Title -->
-
-<div class="mb-3">
-
-<label class="form-label">
-Blog Title *
 </label>
 
 <input
@@ -97,7 +53,9 @@ required>
 <div class="mb-3">
 
 <label class="form-label">
+
 Slug
+
 </label>
 
 <input
@@ -109,75 +67,14 @@ readonly>
 
 </div>
 
-<!-- Featured Image -->
-
-<div class="mb-3">
-
-<label class="form-label">
-Featured Image
-</label>
-
-<input
-type="file"
-name="thumbnail"
-class="form-control"
-accept=".jpg,.jpeg,.png,.webp">
-
-</div>
-
-<!-- Short Description -->
-
-<div class="mb-3">
-
-<label class="form-label">
-Short Description
-</label>
-
-<textarea
-name="short_description"
-class="form-control"
-rows="4"></textarea>
-
-</div>
-
-<!-- Content -->
-
-<div class="mb-3">
-
-<label class="form-label">
-Blog Content *
-</label>
-
-<textarea
-name="content"
-class="form-control"
-rows="12"
-required></textarea>
-
-</div>
-
-<!-- Author -->
-
-<div class="mb-3">
-
-<label class="form-label">
-Author
-</label>
-
-<input
-type="text"
-name="author"
-class="form-control"
-value="OmniSphere Architecture">
-
-</div>
-
 <!-- Meta Title -->
 
 <div class="mb-3">
 
 <label class="form-label">
+
 Meta Title
+
 </label>
 
 <input
@@ -192,7 +89,9 @@ class="form-control">
 <div class="mb-3">
 
 <label class="form-label">
+
 Meta Description
+
 </label>
 
 <textarea
@@ -202,21 +101,21 @@ rows="4"></textarea>
 
 </div>
 
-<!-- Featured -->
+<!-- Display Order -->
 
-<div class="mb-3 form-check">
+<div class="mb-3">
 
-<input
-type="checkbox"
-name="featured"
-class="form-check-input"
-value="1">
+<label class="form-label">
 
-<label class="form-check-label">
-
-Featured Blog
+Display Order
 
 </label>
+
+<input
+type="number"
+name="display_order"
+class="form-control"
+value="0">
 
 </div>
 
@@ -225,7 +124,9 @@ Featured Blog
 <div class="mb-3">
 
 <label class="form-label">
+
 Status
+
 </label>
 
 <select
@@ -252,7 +153,7 @@ Draft
 type="submit"
 class="btn btn-primary">
 
-Save Blog
+Save Category
 
 </button>
 

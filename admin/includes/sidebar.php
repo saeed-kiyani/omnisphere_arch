@@ -27,10 +27,18 @@
         </li>
 
         <li>
-            <a href="/OmniSphere/admin/blog/index.php">
-                Blog
-            </a>
-        </li>
+    <a href="/OmniSphere/admin/blog/index.php">
+        <i class="bi bi-journal-text"></i>
+        Blog
+    </a>
+</li>
+
+<li>
+    <a href="/OmniSphere/admin/blog-categories/index.php">
+        <i class="bi bi-tags"></i>
+        Blog Categories
+    </a>
+</li>
 
         <li>
             <a href="/OmniSphere/admin/team/index.php">
