@@ -48,21 +48,23 @@
         </li>
 
         <li>
-            <a href="/OmniSphere/admin/testimonials/index.php">
-                Testimonials
-            </a>
-        </li>
+    <a href="/OmniSphere/admin/testimonials/index.php">
+        <i class="bi bi-chat-square-quote"></i>
+        Testimonials
+    </a>
+</li>
 
         <li>
             <a href="/OmniSphere/admin/leads/index.php">
+                <i class="bi bi-envelope-paper"></i>
                 Leads
             </a>
         </li>
 
         <li>
-            <a href="/OmniSphere/admin/settings/index.php">
-                Settings
-            </a>
+            <a href="<?= SITE_URL; ?>/admin/settings/index.php">
+    <i class="bi bi-gear"></i> Website Settings
+</a>
         </li>
 
         <li>
