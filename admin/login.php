@@ -85,9 +85,9 @@ if(isset($_SESSION['admin_id'])){
 
 <div class="login-wrapper">
 
-<div class="card login-card p-4">
+<div class="card login-card">
 
-<div class="text-center mb-4">
+<div class="text-center">
 
 <img src="../assets/images/logo.png"
 class="login-logo mb-3"
@@ -109,6 +109,16 @@ Sign in to continue
 
 <form method="POST">
 
+<?php if (!empty($error)): ?>
+
+<div class="alert alert-danger">
+
+<?= e($error); ?>
+
+</div>
+
+<?php endif; ?>
+
 <div class="mb-3">
 
 <label class="form-label">
@@ -116,16 +126,6 @@ Sign in to continue
 Email Address
 
 </label>
-
-<?php if (!empty($error)): ?>
-
-<div class="alert alert-danger">
-
-    <?= e($error); ?>
-
-</div>
-
-<?php endif; ?>
 
 <input
 type="email"
@@ -169,7 +169,8 @@ id="togglePassword">
 <div class="d-grid">
 
 <button
-class="btn btn-primary">
+type="submit"
+class="btn btn-primary w-100">
 
 Login
 

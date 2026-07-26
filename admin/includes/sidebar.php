@@ -42,6 +42,7 @@
 
         <li>
             <a href="/OmniSphere/admin/team/index.php">
+                <i class="bi bi-people"></i>
                 Team
             </a>
         </li>
