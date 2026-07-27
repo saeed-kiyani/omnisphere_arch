@@ -4,12 +4,14 @@ require_once '../../config/config.php';
 require_once '../includes/auth-check.php';
 
 // Fetch Services
-$stmt = $pdo->query("
-SELECT id, title
-FROM services
-WHERE status='Active'
-ORDER BY title ASC
+$stmt = $pdo->prepare("
+    SELECT id, title
+    FROM services
+    WHERE status = 'Published'
+    ORDER BY title ASC
 ");
+
+$stmt->execute();
 
 $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

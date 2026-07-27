@@ -10,7 +10,7 @@ require_once '../includes/auth-check.php';
 $sql = "
 SELECT
     portfolio.*,
-    services.title AS service_name
+    services.title AS service_title
 
 FROM portfolio
 
@@ -126,7 +126,7 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <td>
 
-                                <?= htmlspecialchars($project['service_name']); ?>
+                                <?= htmlspecialchars($project['service_title']); ?>
 
                             </td>
 
@@ -198,24 +198,58 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             <td>
 
-                                <a
-                                href="edit.php?id=<?= $project['id']; ?>"
-                                class="btn btn-warning btn-sm">
+<button
+type="button"
+class="btn btn-info btn-sm viewPortfolio"
 
-                                    Edit
+data-bs-toggle="modal"
 
-                                </a>
+data-bs-target="#viewPortfolioModal"
 
-                                <a
-                                href="delete.php?id=<?= $project['id']; ?>"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('Delete this project?')">
+data-title="<?= e($project['title']); ?>"
 
-                                    Delete
+data-service="<?= e($project['service_title'] ?? ''); ?>"
 
-                                </a>
+data-client="<?= e($project['client_name']); ?>"
 
-                            </td>
+data-location="<?= e($project['location']); ?>"
+
+data-year="<?= e($project['project_year']); ?>"
+
+data-area="<?= e($project['project_area']); ?>"
+
+data-status="<?= e($project['status']); ?>"
+
+data-featured="<?= $project['featured']; ?>"
+
+data-thumbnail="<?= e($project['thumbnail']); ?>"
+
+data-short="<?= e($project['short_description']); ?>"
+
+data-description="<?= htmlspecialchars($project['description']); ?>">
+
+<i class="bi bi-eye"></i>
+
+</button>
+
+<a
+href="edit.php?id=<?= $project['id']; ?>"
+class="btn btn-warning btn-sm">
+
+<i class="bi bi-pencil"></i>
+
+</a>
+
+<a
+href="delete.php?id=<?= $project['id']; ?>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Delete this project?')">
+
+<i class="bi bi-trash"></i>
+
+</a>
+
+</td>
 
                         </tr>
 
@@ -246,5 +280,191 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 </div>
+
+<div class="modal fade" id="viewPortfolioModal" tabindex="-1">
+
+<div class="modal-dialog modal-xl">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Portfolio Project Details
+
+</h5>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-4 text-center">
+
+<img
+id="modalThumbnail"
+class="img-fluid rounded shadow mb-3">
+
+</div>
+
+<div class="col-md-8">
+
+<table class="table table-bordered">
+
+<tr>
+
+<th width="180">Title</th>
+
+<td id="modalTitle"></td>
+
+</tr>
+
+<tr>
+
+<th>Service</th>
+
+<td id="modalService"></td>
+
+</tr>
+
+<tr>
+
+<th>Client</th>
+
+<td id="modalClient"></td>
+
+</tr>
+
+<tr>
+
+<th>Location</th>
+
+<td id="modalLocation"></td>
+
+</tr>
+
+<tr>
+
+<th>Project Year</th>
+
+<td id="modalYear"></td>
+
+</tr>
+
+<tr>
+
+<th>Project Area</th>
+
+<td id="modalArea"></td>
+
+</tr>
+
+<tr>
+
+<th>Featured</th>
+
+<td id="modalFeatured"></td>
+
+</tr>
+
+<tr>
+
+<th>Status</th>
+
+<td id="modalStatus"></td>
+
+</tr>
+
+<tr>
+
+<th>Short Description</th>
+
+<td id="modalShort"></td>
+
+</tr>
+
+<tr>
+
+<th>Description</th>
+
+<td id="modalDescription"></td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+document.querySelectorAll('.viewPortfolio').forEach(button=>{
+
+button.addEventListener('click',function(){
+
+document.getElementById('modalTitle').innerText=this.dataset.title;
+
+document.getElementById('modalService').innerText=this.dataset.service;
+
+document.getElementById('modalClient').innerText=this.dataset.client;
+
+document.getElementById('modalLocation').innerText=this.dataset.location;
+
+document.getElementById('modalYear').innerText=this.dataset.year;
+
+document.getElementById('modalArea').innerText=this.dataset.area;
+
+document.getElementById('modalShort').innerText=this.dataset.short;
+
+document.getElementById('modalDescription').innerHTML=this.dataset.description;
+
+document.getElementById('modalFeatured').innerHTML=
+
+this.dataset.featured==1
+
+?'<span class="badge bg-success">Yes</span>'
+
+:'<span class="badge bg-secondary">No</span>';
+
+document.getElementById('modalStatus').innerHTML=
+
+this.dataset.status=='Published'
+
+?'<span class="badge bg-success">Published</span>'
+
+:'<span class="badge bg-warning text-dark">Draft</span>';
+
+let image=this.dataset.thumbnail;
+
+document.getElementById('modalThumbnail').src=
+
+image
+
+? '../../uploads/portfolio/'+image
+
+: '../../assets/images/no-image.png';
+
+});
+
+});
+
+</script>
 
 <?php include '../includes/footer.php'; ?>

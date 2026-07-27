@@ -96,27 +96,23 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             </td>
 
-                            <td>
+                          <td>
 
-                                <?php if($service['featured']) : ?>
+<?php if ((int)$service['featured'] === 1): ?>
 
-                                    <span class="badge bg-success">
+    <span class="badge bg-success">
+        Yes
+    </span>
 
-                                        Yes
+<?php else: ?>
 
-                                    </span>
+    <span class="badge bg-secondary">
+        No
+    </span>
 
-                                <?php else: ?>
+<?php endif; ?>
 
-                                    <span class="badge bg-secondary">
-
-                                        No
-
-                                    </span>
-
-                                <?php endif; ?>
-
-                            </td>
+</td>
 
                             <td>
 
@@ -153,26 +149,48 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                             </td>
 
-                            <td>
+                         <td>
 
-                                <a
-                                href="edit.php?id=<?php echo $service['id']; ?>"
-                                class="btn btn-warning btn-sm">
+<button
+type="button"
+class="btn btn-info btn-sm viewService"
+data-bs-toggle="modal"
+data-bs-target="#viewServiceModal"
 
-                                    Edit
+data-title="<?= e($service['title']); ?>"
+data-slug="<?= e($service['slug']); ?>"
+data-image="<?= e($service['thumbnail']); ?>"
+data-featured="<?= $service['featured']; ?>"
+data-status="<?= e($service['status']); ?>"
+data-short="<?= e($service['short_description']); ?>"
+data-description="<?= htmlspecialchars($service['description']); ?>"
+data-meta-title="<?= e($service['meta_title']); ?>"
+data-meta-description="<?= e($service['meta_description']); ?>"
+data-created="<?= date('d M Y', strtotime($service['created_at'])); ?>"
+>
 
-                                </a>
+<i class="bi bi-eye"></i>
 
-                                <a
-                                href="delete.php?id=<?php echo $service['id']; ?>"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('Delete this service?')">
+</button>
 
-                                    Delete
+<a
+href="edit.php?id=<?= $service['id']; ?>"
+class="btn btn-warning btn-sm">
 
-                                </a>
+<i class="bi bi-pencil"></i>
 
-                            </td>
+</a>
+
+<a
+href="delete.php?id=<?= $service['id']; ?>"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Delete this service?')">
+
+<i class="bi bi-trash"></i>
+
+</a>
+
+</td>
 
                         </tr>
 
@@ -203,5 +221,151 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
 </div>
+
+<div class="modal fade" id="viewServiceModal" tabindex="-1">
+
+<div class="modal-dialog modal-lg">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+
+Service Details
+
+</h5>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-4 text-center">
+
+<img
+id="modalImage"
+class="img-fluid rounded shadow">
+
+</div>
+
+<div class="col-md-8">
+
+<table class="table table-bordered">
+
+<tr>
+<th width="180">Title</th>
+<td id="modalTitle"></td>
+</tr>
+
+<tr>
+<th>Slug</th>
+<td id="modalSlug"></td>
+</tr>
+
+<tr>
+<th>Featured</th>
+<td id="modalFeatured"></td>
+</tr>
+
+<tr>
+<th>Status</th>
+<td id="modalStatus"></td>
+</tr>
+
+<tr>
+<th>Short Description</th>
+<td id="modalShort"></td>
+</tr>
+
+<tr>
+<th>Description</th>
+<td id="modalDescription"></td>
+</tr>
+
+<tr>
+<th>Meta Title</th>
+<td id="modalMetaTitle"></td>
+</tr>
+
+<tr>
+<th>Meta Description</th>
+<td id="modalMetaDescription"></td>
+</tr>
+
+<tr>
+<th>Created</th>
+<td id="modalCreated"></td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.querySelectorAll('.viewService').forEach(button => {
+
+button.addEventListener('click', function(){
+
+document.getElementById('modalTitle').innerText =
+this.dataset.title;
+
+document.getElementById('modalSlug').innerText =
+this.dataset.slug;
+
+document.getElementById('modalFeatured').innerHTML =
+this.dataset.featured == 1
+? '<span class="badge bg-success">Yes</span>'
+: '<span class="badge bg-secondary">No</span>';
+
+document.getElementById('modalStatus').innerHTML =
+this.dataset.status == 'Published'
+? '<span class="badge bg-success">Published</span>'
+: '<span class="badge bg-warning text-dark">Draft</span>';
+
+document.getElementById('modalShort').innerText =
+this.dataset.short;
+
+document.getElementById('modalDescription').innerHTML =
+this.dataset.description;
+
+document.getElementById('modalMetaTitle').innerText =
+this.dataset.metaTitle;
+
+document.getElementById('modalMetaDescription').innerText =
+this.dataset.metaDescription;
+
+document.getElementById('modalCreated').innerText =
+this.dataset.created;
+
+let image=this.dataset.image;
+
+document.getElementById('modalImage').src=
+image
+? '../../uploads/services/'+image
+: '../../assets/images/no-image.png';
+
+});
+
+});
+
+</script>
 
 <?php include '../includes/footer.php'; ?>

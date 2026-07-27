@@ -57,12 +57,12 @@ function getFeaturedServices()
     global $pdo;
 
     $stmt = $pdo->query("
-        SELECT *
-        FROM services
-        WHERE status='Published'
-        AND featured=1
-        ORDER BY display_order ASC
-    ");
+    SELECT *
+    FROM services
+    WHERE status='Published'
+    AND featured='Yes'
+    ORDER BY id DESC
+");
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -104,17 +104,21 @@ function getPortfolio()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getFeaturedPortfolio()
+function getFeaturedPortfolio($limit = 6)
 {
     global $pdo;
 
-    $stmt = $pdo->query("
+    $stmt = $pdo->prepare("
         SELECT *
         FROM portfolio
-        WHERE featured=1
-        AND status='Published'
-        ORDER BY display_order ASC
+        WHERE featured = 1
+        AND status = 'Published'
+        ORDER BY id DESC
+        LIMIT ?
     ");
+
+    $stmt->bindValue(1, (int)$limit, PDO::PARAM_INT);
+    $stmt->execute();
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -303,3 +307,38 @@ function imageUrl($folder, $filename, $placeholder = 'images/no-image.png')
 
     return asset($placeholder);
 }
+
+
+
+// function getFeaturedPortfolio()
+// {
+//     global $pdo;
+
+//     $stmt = $pdo->query("
+//         SELECT *
+//         FROM portfolio
+//         WHERE status='Published'
+//         AND featured='Yes'
+//         ORDER BY id DESC
+//         LIMIT 6
+//     ");
+
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+
+
+// function getFeaturedPortfolio($limit = 6)
+// {
+//     global $pdo;
+
+//     $sql = "
+//         SELECT *
+//         FROM portfolio
+//         WHERE status='Published'
+//         AND featured=1
+//         ORDER BY id DESC
+//         LIMIT $limit
+//     ";
+
+//     return $pdo->query($sql)->fetchAll();
+// }

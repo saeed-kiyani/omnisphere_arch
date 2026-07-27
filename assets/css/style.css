@@ -495,3 +495,99 @@ Services Section
     margin-left:14px;
 
 }
+
+/* ===================================
+Portfolio Section
+=================================== */
+
+.portfolio-section{
+
+    background:#ffffff;
+
+}
+
+.portfolio-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:15px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.portfolio-image{
+
+    width:100%;
+
+    height:320px;
+
+    object-fit:cover;
+
+    transition:.5s;
+
+}
+
+.portfolio-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    color:#fff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    padding:25px;
+
+    opacity:0;
+
+    transition:.35s;
+
+}
+
+.portfolio-card:hover .portfolio-overlay{
+
+    opacity:1;
+
+}
+
+.portfolio-card:hover .portfolio-image{
+
+    transform:scale(1.08);
+
+}
+
+.portfolio-category{
+
+    display:inline-block;
+
+    background:#4A8BE2;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    margin-bottom:12px;
+
+    width:max-content;
+
+}
+
+.portfolio-overlay h4{
+
+    color:#fff;
+
+    margin-bottom:0;
+
+}
