@@ -195,11 +195,22 @@ Draft
 
 <td>
 
+<button
+type="button"
+class="btn btn-info btn-sm viewTestimonial"
+data-bs-toggle="modal"
+data-bs-target="#viewTestimonialModal"
+data-testimonial='<?= htmlspecialchars(json_encode($row), ENT_QUOTES, "UTF-8"); ?>'>
+
+<i class="bi bi-eye"></i>
+
+</button>
+
 <a
 href="edit.php?id=<?= $row['id']; ?>"
 class="btn btn-warning btn-sm">
 
-Edit
+<i class="bi bi-pencil"></i>
 
 </a>
 
@@ -208,7 +219,7 @@ href="delete.php?id=<?= $row['id']; ?>"
 class="btn btn-danger btn-sm"
 onclick="return confirm('Delete this testimonial?')">
 
-Delete
+<i class="bi bi-trash"></i>
 
 </a>
 
@@ -243,5 +254,168 @@ No testimonials found.
 </div>
 
 </div>
+
+
+<!-- View Testimonial Modal -->
+
+<div class="modal fade" id="viewTestimonialModal" tabindex="-1">
+
+<div class="modal-dialog modal-xl">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h5 class="modal-title">
+Testimonial Details
+</h5>
+
+<button
+type="button"
+class="btn-close"
+data-bs-dismiss="modal"></button>
+
+</div>
+
+<div class="modal-body">
+
+<div class="row">
+
+<div class="col-md-4 text-center">
+
+<img
+id="testimonialPhoto"
+class="img-fluid rounded shadow mb-3"
+style="
+width:220px;
+height:220px;
+object-fit:cover;
+">
+
+</div>
+
+<div class="col-md-8">
+
+<table class="table table-bordered">
+
+<tr>
+<th width="180">Client Name</th>
+<td id="testimonialClient"></td>
+</tr>
+
+<tr>
+<th>Designation</th>
+<td id="testimonialDesignation"></td>
+</tr>
+
+<tr>
+<th>Company</th>
+<td id="testimonialCompany"></td>
+</tr>
+
+<tr>
+<th>Rating</th>
+<td id="testimonialRating"></td>
+</tr>
+
+<tr>
+<th>Review</th>
+<td>
+<div
+id="testimonialReview"
+style="
+max-height:220px;
+overflow-y:auto;
+"></div>
+</td>
+</tr>
+
+<tr>
+<th>Featured</th>
+<td id="testimonialFeatured"></td>
+</tr>
+
+<tr>
+<th>Display Order</th>
+<td id="testimonialOrder"></td>
+</tr>
+
+<tr>
+<th>Status</th>
+<td id="testimonialStatus"></td>
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+document.querySelectorAll('.viewTestimonial').forEach(button=>{
+
+button.addEventListener('click',function(){
+
+const t = JSON.parse(this.dataset.testimonial);
+
+document.getElementById('testimonialPhoto').src =
+t.profile_image
+? '../../uploads/testimonials/' + t.profile_image
+: '../../assets/images/no-image.png';
+
+document.getElementById('testimonialClient').innerText =
+t.client_name || '-';
+
+document.getElementById('testimonialDesignation').innerText =
+t.designation || '-';
+
+document.getElementById('testimonialCompany').innerText =
+t.company_name || '-';
+
+document.getElementById('testimonialReview').innerHTML =
+t.review || '-';
+
+let stars='';
+
+for(let i=1;i<=5;i++){
+
+stars += (i<=parseInt(t.rating))
+
+? '<i class="bi bi-star-fill text-warning"></i> '
+
+: '<i class="bi bi-star text-warning"></i> ';
+
+}
+
+document.getElementById('testimonialRating').innerHTML = stars;
+
+document.getElementById('testimonialFeatured').innerHTML =
+t.featured=='Yes'
+? '<span class="badge bg-success">Yes</span>'
+: '<span class="badge bg-secondary">No</span>';
+
+document.getElementById('testimonialOrder').innerText =
+t.display_order;
+
+document.getElementById('testimonialStatus').innerHTML =
+t.status=='Published'
+? '<span class="badge bg-success">Published</span>'
+: '<span class="badge bg-warning text-dark">Draft</span>';
+
+});
+
+});
+
+</script>
 
 <?php require_once '../includes/footer.php'; ?>

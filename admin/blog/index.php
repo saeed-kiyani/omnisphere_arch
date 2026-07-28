@@ -63,7 +63,7 @@ Add New Blog
 
 <table class="table table-bordered table-hover align-middle">
 
-<thead class="table-light">
+<thead class="table-dark">
 
 <tr>
 
@@ -382,21 +382,29 @@ document.querySelectorAll('.viewBlog').forEach(button => {
 
         const blog = JSON.parse(this.dataset.blog);
 
-        document.getElementById('blogTitle').innerText = blog.title;
+        document.getElementById('blogTitle').innerText =
+    blog.title || '-';
 
-        document.getElementById('blogSlug').innerText = blog.slug;
+        document.getElementById('blogSlug').innerText =
+    blog.slug || '-';
 
-        document.getElementById('blogCategory').innerText = blog.category_name;
+        document.getElementById('blogCategory').innerText =
+    blog.category_name || '-';
 
-        document.getElementById('blogShort').innerText = blog.short_description;
+        document.getElementById('blogShort').innerText =
+    blog.short_description || '-';
 
-        document.getElementById('blogDescription').innerHTML = blog.description;
+        document.getElementById('blogDescription').innerHTML =
+    blog.content || '-';
 
-        document.getElementById('blogMetaTitle').innerText = blog.meta_title;
+        document.getElementById('blogMetaTitle').innerText =
+    blog.meta_title || '-';
 
-        document.getElementById('blogMetaDescription').innerText = blog.meta_description;
+document.getElementById('blogMetaDescription').innerText =
+    blog.meta_description || '-';
 
-        document.getElementById('blogCreated').innerText = blog.created_at;
+document.getElementById('blogCreated').innerText =
+    blog.created_at || '-';
 
         document.getElementById('blogFeatured').innerHTML =
             blog.featured == 1

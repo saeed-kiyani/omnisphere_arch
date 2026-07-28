@@ -58,21 +58,9 @@ Add Team Member
 
 <?php endif; ?>
 
-<?php if(isset($_SESSION['success'])): ?>
-
-<div class="alert alert-success">
-
-<?= $_SESSION['success']; ?>
-
-</div>
-
-<?php unset($_SESSION['success']); ?>
-
-<?php endif; ?>
-
 <table class="table table-bordered table-hover align-middle">
 
-<thead>
+<thead class="table-dark">
 
 <tr>
 
@@ -227,166 +215,125 @@ No team members found.
 </div>
 
 
-<div class="modal-body">
+<div class="modal fade" id="viewTeamModal" tabindex="-1" aria-hidden="true">
 
-<div class="row">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
 
-<!-- Image Column -->
+        <div class="modal-content">
 
-<div class="col-md-4 text-center">
+            <div class="modal-header">
 
-<div class="sticky-top">
+                <h5 class="modal-title">
+                    Team Member Details
+                </h5>
 
-<img
-id="memberPhoto"
-class="img-fluid rounded shadow"
-style="
-width:220px;
-height:220px;
-object-fit:cover;
-">
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
 
-</div>
+            </div>
 
-</div>
+            <div class="modal-body">
 
+                <div class="row">
 
-<!-- Details Column -->
+                    <!-- Photo -->
 
-<div class="col-md-8">
+                    <div class="col-md-4 text-center">
 
+                        <img
+                            id="memberPhoto"
+                            class="img-fluid rounded-circle shadow"
+                            style="
+                                width:220px;
+                                height:220px;
+                                object-fit:cover;
+                            ">
 
-<table class="table table-bordered">
+                    </div>
 
+                    <!-- Details -->
 
-<tr>
-<th width="180">
-Full Name
-</th>
+                    <div class="col-md-8">
 
-<td id="memberName"></td>
+                        <table class="table table-bordered align-middle">
 
-</tr>
+                            <tr>
+                                <th width="180">Full Name</th>
+                                <td id="memberName"></td>
+                            </tr>
 
+                            <tr>
+                                <th>Designation</th>
+                                <td id="memberDesignation"></td>
+                            </tr>
 
-<tr>
+                            <tr>
 
-<th>
-Designation
-</th>
+                                <th>Bio</th>
 
-<td id="memberDesignation"></td>
+                                <td>
 
-</tr>
+                                    <div
+                                        id="memberBio"
+                                        style="
+                                            max-height:220px;
+                                            overflow-y:auto;
+                                        ">
+                                    </div>
 
+                                </td>
 
-<tr>
+                            </tr>
 
-<th>
-Bio
-</th>
+                            <tr>
+                                <th>Email</th>
+                                <td id="memberEmail"></td>
+                            </tr>
 
-<td>
+                            <tr>
+                                <th>Phone</th>
+                                <td id="memberPhone"></td>
+                            </tr>
 
-<div 
-id="memberBio"
-style="
-max-height:250px;
-overflow-y:auto;
-">
+                            <tr>
+                                <th>LinkedIn</th>
+                                <td id="memberLinkedin"></td>
+                            </tr>
 
-</div>
+                            <tr>
+                                <th>Facebook</th>
+                                <td id="memberFacebook"></td>
+                            </tr>
 
-</td>
+                            <tr>
+                                <th>Instagram</th>
+                                <td id="memberInstagram"></td>
+                            </tr>
 
-</tr>
+                            <tr>
+                                <th>Display Order</th>
+                                <td id="memberOrder"></td>
+                            </tr>
 
+                            <tr>
+                                <th>Status</th>
+                                <td id="memberStatus"></td>
+                            </tr>
 
-<tr>
+                        </table>
 
-<th>
-Email
-</th>
+                    </div>
 
-<td id="memberEmail"></td>
+                </div>
 
-</tr>
+            </div>
 
+        </div>
 
-<tr>
-
-<th>
-Phone
-</th>
-
-<td id="memberPhone"></td>
-
-</tr>
-
-
-<tr>
-
-<th>
-LinkedIn
-</th>
-
-<td id="memberLinkedin"></td>
-
-</tr>
-
-
-<tr>
-
-<th>
-Facebook
-</th>
-
-<td id="memberFacebook"></td>
-
-</tr>
-
-
-<tr>
-
-<th>
-Instagram
-</th>
-
-<td id="memberInstagram"></td>
-
-</tr>
-
-
-<tr>
-
-<th>
-Display Order
-</th>
-
-<td id="memberOrder"></td>
-
-</tr>
-
-
-<tr>
-
-<th>
-Status
-</th>
-
-<td id="memberStatus"></td>
-
-</tr>
-
-
-</table>
-
-
-</div>
-
-
-</div>
-
+    </div>
 
 </div>
 

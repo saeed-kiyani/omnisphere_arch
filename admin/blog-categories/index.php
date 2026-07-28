@@ -53,7 +53,7 @@ Add New Category
 
 <table class="table table-bordered table-hover align-middle">
 
-<thead class="table-light">
+<thead class="table-dark">
 
 <tr>
 
