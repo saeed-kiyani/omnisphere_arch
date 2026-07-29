@@ -3,8 +3,6 @@
 require_once '../../config/config.php';
 require_once '../includes/auth-check.php';
 
-$pageTitle = "Team Members";
-
 $sql = "
 SELECT *
 FROM team

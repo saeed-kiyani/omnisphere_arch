@@ -3,7 +3,7 @@
 require_once '../config/config.php';
 require_once 'includes/auth-check.php';
 
-$pageTitle = "Dashboard";
+$pageTitle = "Dashboard Overview";
 
 // ================================
 // Dashboard Statistics
@@ -25,6 +25,31 @@ $totalLeads = $pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn();
 
 $totalViews = $pdo->query("SELECT IFNULL(SUM(views),0) FROM blog")->fetchColumn();
 
+// Latest Leads
+
+$latestLeads = $pdo->query("
+SELECT
+full_name,
+email,
+created_at
+FROM contact_leads
+ORDER BY id DESC
+LIMIT 5
+")->fetchAll(PDO::FETCH_ASSOC);
+
+
+// Latest Blogs
+
+$latestBlogs = $pdo->query("
+SELECT
+title,
+status,
+created_at
+FROM blog
+ORDER BY id DESC
+LIMIT 5
+")->fetchAll(PDO::FETCH_ASSOC);
+
 include 'includes/header.php';
 include 'includes/sidebar.php';
 include 'includes/topbar.php';
@@ -33,9 +58,11 @@ include 'includes/topbar.php';
 
 <div class="content">
 
-<h1 class="dashboard-title mb-4">
-Dashboard
-</h1>
+<p class="text-muted mb-4 text-center">
+
+    Welcome back! Here's what's happening across OmniSphere Architecture today.
+
+</p>
 
 <!-- ===========================
 Primary KPI Cards
@@ -45,9 +72,12 @@ Primary KPI Cards
 
 <div class="col-lg-3 col-md-6">
 
+<a href="portfolio/index.php" class="text-decoration-none">
+
 <div class="stat-card">
 
 <div class="stat-icon">
+    
 <i class="bi bi-building"></i>
 </div>
 
@@ -59,9 +89,13 @@ Primary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 <div class="col-lg-3 col-md-6">
+
+<a href="services/index.php" class="text-decoration-none">
 
 <div class="stat-card">
 
@@ -77,9 +111,13 @@ Primary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 <div class="col-lg-3 col-md-6">
+
+<a href="blog/index.php" class="text-decoration-none">
 
 <div class="stat-card">
 
@@ -95,9 +133,13 @@ Primary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 <div class="col-lg-3 col-md-6">
+
+<a href="leads/index.php" class="text-decoration-none">
 
 <div class="stat-card">
 
@@ -113,6 +155,8 @@ Primary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 </div>
@@ -124,6 +168,8 @@ Secondary KPI Cards
 <div class="row g-4">
 
 <div class="col-lg-3 col-md-6">
+
+<a href="blog-categories/index.php" class="text-decoration-none">
 
 <div class="stat-card secondary-card">
 
@@ -139,9 +185,13 @@ Secondary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 <div class="col-lg-3 col-md-6">
+
+<a href="team/index.php" class="text-decoration-none">
 
 <div class="stat-card secondary-card">
 
@@ -157,9 +207,13 @@ Secondary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 <div class="col-lg-3 col-md-6">
+
+<a href="testimonials/index.php" class="text-decoration-none">
 
 <div class="stat-card secondary-card">
 
@@ -175,9 +229,13 @@ Secondary KPI Cards
 
 </div>
 
+</a>
+
 </div>
 
 <div class="col-lg-3 col-md-6">
+
+<a href="blog/index.php" class="text-decoration-none">
 
 <div class="stat-card secondary-card">
 
@@ -192,6 +250,8 @@ Secondary KPI Cards
 <small>Total Views</small>
 
 </div>
+
+</a>
 
 </div>
 
@@ -214,6 +274,24 @@ Secondary KPI Cards
 
                 <canvas id="monthlyLeadsChart" height="100"></canvas>
 
+                <div class="chart-empty text-center py-5">
+
+    <i class="bi bi-bar-chart-line fs-1 text-secondary"></i>
+
+    <p class="mt-3 mb-0">
+
+        No analytics data available yet.
+
+    </p>
+
+    <small class="text-muted">
+
+        Charts will appear automatically once data is available.
+
+    </small>
+
+</div>
+
             </div>
 
         </div>
@@ -231,6 +309,210 @@ Secondary KPI Cards
             <div class="card-body">
 
                 <canvas id="contentChart"></canvas>
+
+                <div class="chart-empty text-center py-5">
+
+    <i class="bi bi-bar-chart-line fs-1 text-secondary"></i>
+
+    <p class="mt-3 mb-0">
+
+        No analytics data available yet.
+
+    </p>
+
+    <small class="text-muted">
+
+        Charts will appear automatically once data is available.
+
+    </small>
+
+</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <!-- Latest Leads -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header">
+
+                <i class="bi bi-envelope-paper me-2"></i>
+
+                Latest Leads
+
+            </div>
+
+            <div class="card-body p-0">
+
+                <table class="table table-hover mb-0">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <?php if(count($latestLeads)): ?>
+
+                        <?php foreach($latestLeads as $lead): ?>
+
+                        <tr>
+
+                            <td><?= e($lead['full_name']) ?></td>
+
+                            <td><?= e($lead['email']) ?></td>
+
+                            <td>
+
+                                <?= date('d M Y',strtotime($lead['created_at'])) ?>
+
+                            </td>
+
+                        </tr>
+
+                        <?php endforeach; ?>
+
+                    <?php else: ?>
+
+                        <tr>
+
+                            <td colspan="3" class="text-center py-4">
+
+                                No leads yet.
+
+                            </td>
+
+                        </tr>
+
+                    <?php endif; ?>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Recent Blogs -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header">
+
+                <i class="bi bi-journal-text me-2"></i>
+
+                Recent Blog Posts
+
+            </div>
+
+            <div class="card-body p-0">
+
+                <table class="table table-hover mb-0">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Title</th>
+
+                            <th>Status</th>
+
+                            <th>Date</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <?php if(count($latestBlogs)): ?>
+
+                        <?php foreach($latestBlogs as $blog): ?>
+
+                        <tr>
+
+                            <td>
+
+                                <?= e($blog['title']) ?>
+
+                            </td>
+
+                            <td>
+
+                                <?php if($blog['status']=="Published"): ?>
+
+                                    <span class="badge bg-success">
+
+                                        Published
+
+                                    </span>
+
+                                <?php else: ?>
+
+                                    <span class="badge bg-secondary">
+
+                                        Draft
+
+                                    </span>
+
+                                <?php endif; ?>
+
+                            </td>
+
+                            <td>
+
+                                <?= date('d M Y',strtotime($blog['created_at'])) ?>
+
+                            </td>
+
+                        </tr>
+
+                        <?php endforeach; ?>
+
+                    <?php else: ?>
+
+                        <tr>
+
+                            <td colspan="3" class="text-center py-4">
+
+                                No blog posts.
+
+                            </td>
+
+                        </tr>
+
+                    <?php endif; ?>
+
+                    </tbody>
+
+                </table>
 
             </div>
 
@@ -378,6 +660,14 @@ position:'bottom'
 }
 
 });
+
+if(totalLeads > 0){
+
+    document.querySelector('.chart-empty').style.display='none';
+
+    // Initialize Chart.js
+
+}
 
 </script>
 

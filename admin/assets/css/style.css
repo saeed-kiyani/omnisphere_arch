@@ -45,7 +45,7 @@
 
         min-height:100vh;
 
-        background:#465F87;
+        background: #002245;
 
         color:#fff;
 
@@ -99,7 +99,7 @@
 
     .sidebar a:hover{
 
-        background:#4A8BE2;
+        background:#C79C55;
 
     }
 
@@ -162,7 +162,7 @@ Dashboard
 
     box-shadow:0 10px 30px rgba(0,0,0,.06);
 
-    border-top:5px solid #4A8BE2;
+    border-top:5px solid #002245;
 
     transition:.35s;
 
@@ -172,7 +172,15 @@ Dashboard
 
 .secondary-card{
 
-    border-top:5px solid #465F87;
+    border-top:5px solid #002245;
+
+}
+
+.stat-card{
+
+    transition:all .35s ease;
+
+    cursor:pointer;
 
 }
 
@@ -180,7 +188,9 @@ Dashboard
 
     transform:translateY(-8px);
 
-    box-shadow:0 20px 45px rgba(0,0,0,.12);
+    box-shadow:0 18px 45px rgba(0,0,0,.12);
+
+    border-top-color:#C79C55;
 
 }
 
@@ -210,7 +220,7 @@ Dashboard
 
     font-size:34px;
 
-    color:#4A8BE2;
+    color:#002245;
 
 }
 
@@ -222,7 +232,7 @@ Dashboard
 
 .secondary-card .stat-icon i{
 
-    color:#465F87;
+    color:#002245;
 
 }
 
@@ -232,7 +242,7 @@ Dashboard
 
     font-weight:700;
 
-    color:#222;
+    color:#002245;
 
     margin-bottom:8px;
 
@@ -244,7 +254,7 @@ Dashboard
 
     font-weight:600;
 
-    color:#465F87;
+    color:#002245;
 
     margin-bottom:5px;
 
@@ -257,7 +267,6 @@ Dashboard
     font-size:14px;
 
 }
-
 
 .dashboard-card{
 
@@ -286,5 +295,37 @@ Dashboard
 .dashboard-card .card-body{
 
     padding:25px;
+
+}
+
+.dashboard-card table{
+
+    margin-bottom:0;
+
+}
+
+.dashboard-card table th{
+
+    font-weight:600;
+
+    font-size:14px;
+
+    color:#465F87;
+
+    background:#f8fafc;
+
+}
+
+.dashboard-card table td{
+
+    vertical-align:middle;
+
+    font-size:14px;
+
+}
+
+.dashboard-card tbody tr:hover{
+
+    background:#f8fbff;
 
 }

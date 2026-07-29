@@ -14,13 +14,29 @@
 
 <div>
 
-Welcome,
+<?php
 
-<strong>
+$hour = date('H');
 
-<?= e($_SESSION['admin_name']) ?>
+if($hour < 12){
 
-</strong>
+    $greeting = "Good Morning";
+
+}elseif($hour < 17){
+
+    $greeting = "Good Afternoon";
+
+}else{
+
+    $greeting = "Good Evening";
+
+}
+
+?>
+
+<?= $greeting ?>,
+
+<strong>OmniSphere Admin</strong>
 
 </div>
 

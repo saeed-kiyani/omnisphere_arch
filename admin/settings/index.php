@@ -24,8 +24,6 @@ if (!$settings) {
 
 }
 
-$pageTitle = "Website Settings";
-
 include '../includes/header.php';
 include '../includes/sidebar.php';
 include '../includes/topbar.php';

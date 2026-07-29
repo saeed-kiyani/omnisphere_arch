@@ -1,7 +1,8 @@
 <div class="sidebar">
 
     <div class="logo">
-        <h4>OmniSphere</h4>
+        <img src="http://localhost/OmniSphere/admin/assets/images/sidebarlogo.png" width="70px" height="70px" />
+        <h5>OmniSphere<br><span class="h6">ARCHITECTURE</span></h5>
     </div>
 
     <ul>
