@@ -307,38 +307,3 @@ function imageUrl($folder, $filename, $placeholder = 'images/no-image.png')
 
     return asset($placeholder);
 }
-
-
-
-// function getFeaturedPortfolio()
-// {
-//     global $pdo;
-
-//     $stmt = $pdo->query("
-//         SELECT *
-//         FROM portfolio
-//         WHERE status='Published'
-//         AND featured='Yes'
-//         ORDER BY id DESC
-//         LIMIT 6
-//     ");
-
-//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
-// }
-
-
-// function getFeaturedPortfolio($limit = 6)
-// {
-//     global $pdo;
-
-//     $sql = "
-//         SELECT *
-//         FROM portfolio
-//         WHERE status='Published'
-//         AND featured=1
-//         ORDER BY id DESC
-//         LIMIT $limit
-//     ";
-
-//     return $pdo->query($sql)->fetchAll();
-// }

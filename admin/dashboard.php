@@ -257,8 +257,7 @@ Secondary KPI Cards
 
 </div>
 
-</div>
-
+<!-- Monthly Leads -->
 
 <div class="row mt-4">
 
@@ -344,13 +343,21 @@ Secondary KPI Cards
 
         <div class="card dashboard-card">
 
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
 
-                <i class="bi bi-envelope-paper me-2"></i>
+    <span>
+        <i class="bi bi-envelope-paper me-2"></i>
+        Latest Leads
 
-                Latest Leads
+    </span>
 
-            </div>
+    <a href="leads/index.php" class="btn btn-outline-secondary text-dark">
+
+        View All
+
+    </a>
+
+</div>
 
             <div class="card-body p-0">
 
@@ -370,43 +377,43 @@ Secondary KPI Cards
 
                     </thead>
 
-                    <tbody>
+                   <tbody>
 
-                    <?php if(count($latestLeads)): ?>
+<?php if(count($latestLeads)): ?>
 
-                        <?php foreach($latestLeads as $lead): ?>
+    <?php foreach($latestLeads as $lead): ?>
 
-                        <tr>
+    <tr>
 
-                            <td><?= e($lead['full_name']) ?></td>
+        <td><?= e($lead['full_name']) ?></td>
 
-                            <td><?= e($lead['email']) ?></td>
+        <td><?= e($lead['email']) ?></td>
 
-                            <td>
+        <td>
 
-                                <?= date('d M Y',strtotime($lead['created_at'])) ?>
+            <?= timeAgo($lead['created_at']) ?>
 
-                            </td>
+        </td>
 
-                        </tr>
+    </tr>
 
-                        <?php endforeach; ?>
+    <?php endforeach; ?>
 
-                    <?php else: ?>
+<?php else: ?>
 
-                        <tr>
+<tr>
 
-                            <td colspan="3" class="text-center py-4">
+    <td colspan="3" class="text-center py-4">
 
-                                No leads yet.
+        No leads yet.
 
-                            </td>
+    </td>
 
-                        </tr>
+</tr>
 
-                    <?php endif; ?>
+<?php endif; ?>
 
-                    </tbody>
+</tbody>
 
                 </table>
 
@@ -424,13 +431,21 @@ Secondary KPI Cards
 
         <div class="card dashboard-card">
 
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between">
 
-                <i class="bi bi-journal-text me-2"></i>
+    <span>
+        <i class="bi bi-journal-text me-2"></i>
+        Recent Blog Posts
 
-                Recent Blog Posts
+    </span>
 
-            </div>
+    <a href="blog/index.php" class="btn btn-outline-secondary text-dark">
+
+        View All
+
+    </a>
+
+</div>
 
             <div class="card-body p-0">
 
@@ -452,66 +467,55 @@ Secondary KPI Cards
 
                     <tbody>
 
-                    <?php if(count($latestBlogs)): ?>
+<?php if(count($latestBlogs)): ?>
 
-                        <?php foreach($latestBlogs as $blog): ?>
+    <?php foreach($latestBlogs as $blog): ?>
 
-                        <tr>
+    <tr>
 
-                            <td>
+        <td>
+            <?= e($blog['title']) ?>
+        </td>
 
-                                <?= e($blog['title']) ?>
+        <td>
 
-                            </td>
+            <?php if($blog['status']=="Published"): ?>
 
-                            <td>
+                <span class="badge bg-success">
+                    Published
+                </span>
 
-                                <?php if($blog['status']=="Published"): ?>
+            <?php else: ?>
 
-                                    <span class="badge bg-success">
+                <span class="badge bg-warning text-dark">
+                    Draft
+                </span>
 
-                                        Published
+            <?php endif; ?>
 
-                                    </span>
+        </td>
 
-                                <?php else: ?>
+        <td>
+            <?= timeAgo($blog['created_at']) ?>
+        </td>
 
-                                    <span class="badge bg-secondary">
+    </tr>
 
-                                        Draft
+    <?php endforeach; ?>
 
-                                    </span>
+<?php else: ?>
 
-                                <?php endif; ?>
+<tr>
 
-                            </td>
+    <td colspan="3" class="text-center py-4">
+        No blog posts.
+    </td>
 
-                            <td>
+</tr>
 
-                                <?= date('d M Y',strtotime($blog['created_at'])) ?>
+<?php endif; ?>
 
-                            </td>
-
-                        </tr>
-
-                        <?php endforeach; ?>
-
-                    <?php else: ?>
-
-                        <tr>
-
-                            <td colspan="3" class="text-center py-4">
-
-                                No blog posts.
-
-                            </td>
-
-                        </tr>
-
-                    <?php endif; ?>
-
-                    </tbody>
-
+</tbody>
                 </table>
 
             </div>
@@ -519,6 +523,8 @@ Secondary KPI Cards
         </div>
 
     </div>
+
+</div>
 
 </div>
 
