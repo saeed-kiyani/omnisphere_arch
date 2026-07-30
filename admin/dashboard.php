@@ -5,50 +5,7 @@ require_once 'includes/auth-check.php';
 
 $pageTitle = "Dashboard Overview";
 
-// ================================
-// Dashboard Statistics
-// ================================
-
-$totalPortfolio = $pdo->query("SELECT COUNT(*) FROM portfolio")->fetchColumn();
-
-$totalServices = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
-
-$totalBlogs = $pdo->query("SELECT COUNT(*) FROM blog")->fetchColumn();
-
-$totalCategories = $pdo->query("SELECT COUNT(*) FROM blog_categories")->fetchColumn();
-
-$totalTeam = $pdo->query("SELECT COUNT(*) FROM team")->fetchColumn();
-
-$totalTestimonials = $pdo->query("SELECT COUNT(*) FROM testimonials")->fetchColumn();
-
-$totalLeads = $pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn();
-
-$totalViews = $pdo->query("SELECT IFNULL(SUM(views),0) FROM blog")->fetchColumn();
-
-// Latest Leads
-
-$latestLeads = $pdo->query("
-SELECT
-full_name,
-email,
-created_at
-FROM contact_leads
-ORDER BY id DESC
-LIMIT 5
-")->fetchAll(PDO::FETCH_ASSOC);
-
-
-// Latest Blogs
-
-$latestBlogs = $pdo->query("
-SELECT
-title,
-status,
-created_at
-FROM blog
-ORDER BY id DESC
-LIMIT 5
-")->fetchAll(PDO::FETCH_ASSOC);
+require_once 'dashboard-data.php';
 
 include 'includes/header.php';
 include 'includes/sidebar.php';
@@ -273,24 +230,6 @@ Secondary KPI Cards
 
                 <canvas id="monthlyLeadsChart" height="100"></canvas>
 
-                <div class="chart-empty text-center py-5">
-
-    <i class="bi bi-bar-chart-line fs-1 text-secondary"></i>
-
-    <p class="mt-3 mb-0">
-
-        No analytics data available yet.
-
-    </p>
-
-    <small class="text-muted">
-
-        Charts will appear automatically once data is available.
-
-    </small>
-
-</div>
-
             </div>
 
         </div>
@@ -309,29 +248,270 @@ Secondary KPI Cards
 
                 <canvas id="contentChart"></canvas>
 
-                <div class="chart-empty text-center py-5">
+            </div>
 
-    <i class="bi bi-bar-chart-line fs-1 text-secondary"></i>
+        </div>
 
-    <p class="mt-3 mb-0">
-
-        No analytics data available yet.
-
-    </p>
-
-    <small class="text-muted">
-
-        Charts will appear automatically once data is available.
-
-    </small>
+    </div>
 
 </div>
+
+<div class="row mt-4">
+
+    <div class="col-lg-12">
+
+        <div class="card dashboard-card">
+
+            <div class="card-header">
+
+                <i class="bi bi-journal-text me-2"></i>
+
+                Monthly Blog Posts
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas id="monthlyBlogChart" height="90"></canvas>
 
             </div>
 
         </div>
 
     </div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-lg-12">
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<i class="bi bi-graph-up-arrow me-2"></i>
+
+Latest 7-Day Leads Trend
+
+</div>
+
+<div class="card-body">
+
+<canvas id="last7DaysChart" height="90"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-lg-6">
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<i class="bi bi-funnel me-2"></i>
+
+Lead Conversion Summary
+
+</div>
+
+<div class="card-body">
+
+<canvas id="leadSummaryChart" height="240"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-lg-6">
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<i class="bi bi-bar-chart-line me-2"></i>
+
+Lead Pipeline
+
+</div>
+
+<div class="card-body">
+
+<div class="mb-3">
+
+<div class="d-flex justify-content-between">
+
+<span>New</span>
+
+<strong><?= $leadSummary['New'] ?></strong>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar bg-primary"
+style="width:<?= max(5,$leadSummary['New']*10) ?>%">
+</div>
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<div class="d-flex justify-content-between">
+
+<span>Contacted</span>
+
+<strong><?= $leadSummary['Contacted'] ?></strong>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar bg-info"
+style="width:<?= max(5,$leadSummary['Contacted']*10) ?>%">
+</div>
+
+</div>
+
+</div>
+
+<div class="mb-3">
+
+<div class="d-flex justify-content-between">
+
+<span>Converted</span>
+
+<strong><?= $leadSummary['Converted'] ?></strong>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar bg-success"
+style="width:<?= max(5,$leadSummary['Converted']*10) ?>%">
+</div>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="d-flex justify-content-between">
+
+<span>Closed</span>
+
+<strong><?= $leadSummary['Closed'] ?></strong>
+
+</div>
+
+<div class="progress">
+
+<div
+class="progress-bar bg-secondary"
+style="width:<?= max(5,$leadSummary['Closed']*10) ?>%">
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="dashboard-card">
+
+<div class="card-header">
+
+<h5>
+
+<i class="bi bi-funnel me-2"></i>
+
+Sales Pipeline
+
+</h5>
+
+</div>
+
+<div class="card-body">
+
+<?php foreach($leadPipeline as $stage=>$count): ?>
+
+<?php
+
+$percent = round(($count/$totalPipelineLeads)*100);
+
+?>
+
+<div class="pipeline-item">
+
+<div class="d-flex justify-content-between mb-1">
+
+<span class="pipeline-stage">
+
+<?= e($stage) ?>
+
+</span>
+
+<strong>
+
+<?= $count ?>
+
+</strong>
+
+</div>
+
+<div class="progress pipeline-progress">
+
+<div
+class="progress-bar"
+
+style="width:<?= $percent ?>%;"
+
+>
+
+<?= $percent ?>%
+
+</div>
+
+</div>
+
+</div>
+
+<?php endforeach; ?>
+
+<hr>
+
+<div class="d-flex justify-content-between">
+
+<strong>Total Leads</strong>
+
+<strong>
+
+<?= array_sum($leadPipeline) ?>
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -526,10 +706,411 @@ Secondary KPI Cards
 
 </div>
 
+<!-- ========================================================= -->
+<!-- Quick Actions -->
+<!-- ========================================================= -->
+
+<div class="row mt-4">
+
+    <div class="col-12 mb-3">
+        <h4 class="dashboard-section-title">
+            Quick Actions
+        </h4>
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+
+        <a href="portfolio/create.php" class="quick-card">
+
+            <div class="quick-icon">
+                <i class="bi bi-building"></i>
+            </div>
+
+            <h5>Add Portfolio</h5>
+
+            <p>Create new project</p>
+
+        </a>
+
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+
+        <a href="services/create.php" class="quick-card">
+
+            <div class="quick-icon">
+                <i class="bi bi-grid"></i>
+            </div>
+
+            <h5>Add Service</h5>
+
+            <p>Manage services</p>
+
+        </a>
+
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+
+        <a href="blog/create.php" class="quick-card">
+
+            <div class="quick-icon">
+                <i class="bi bi-journal-text"></i>
+            </div>
+
+            <h5>Add Blog</h5>
+
+            <p>Write article</p>
+
+        </a>
+
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+
+        <a href="team/create.php" class="quick-card">
+
+            <div class="quick-icon">
+                <i class="bi bi-people"></i>
+            </div>
+
+            <h5>Add Team</h5>
+
+            <p>Add member</p>
+
+        </a>
+
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+
+        <a href="testimonials/create.php" class="quick-card">
+
+            <div class="quick-icon">
+                <i class="bi bi-chat-square-quote"></i>
+            </div>
+
+            <h5>Add Testimonial</h5>
+
+            <p>Client reviews</p>
+
+        </a>
+
+    </div>
+
+    <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
+
+        <a href="settings.php" class="quick-card">
+
+            <div class="quick-icon">
+                <i class="bi bi-gear"></i>
+            </div>
+
+            <h5>Settings</h5>
+
+            <p>Website options</p>
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+
+    <!-- Website Overview -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header">
+
+                <i class="bi bi-globe me-2"></i>
+
+                Website Overview
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-borderless overview-table mb-0">
+
+                    <tr>
+
+                        <td>Status</td>
+
+                        <td>
+
+                            <span class="badge bg-success">
+
+                                <?= $websiteStatus ?>
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Environment</td>
+
+                        <td><?= $environment ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>PHP Version</td>
+
+                        <td><?= $phpVersion ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>MySQL</td>
+
+                        <td><?= $mysqlVersion ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Server Date</td>
+
+                        <td><?= $serverTime ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Server Time</td>
+
+                        <td><?= $serverClock ?></td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Database Overview -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header">
+
+                <i class="bi bi-database me-2"></i>
+
+                Database Overview
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-borderless overview-table mb-0">
+
+                    <tr><td>Portfolio</td><td><?= $portfolioCount ?></td></tr>
+
+                    <tr><td>Services</td><td><?= $serviceCount ?></td></tr>
+
+                    <tr><td>Blogs</td><td><?= $blogCount ?></td></tr>
+
+                    <tr><td>Categories</td><td><?= $categoryCount ?></td></tr>
+
+                    <tr><td>Team</td><td><?= $teamCount ?></td></tr>
+
+                    <tr><td>Testimonials</td><td><?= $testimonialCount ?></td></tr>
+
+                    <tr><td>Leads</td><td><?= $leadCount ?></td></tr>
+
+                    <tr class="fw-bold">
+
+                        <td>Total Records</td>
+
+                        <td><?= $totalRecords ?></td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 
+
+<div class="row">
+
+    <!-- Recent Activity -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header">
+
+                <i class="bi bi-clock-history me-2"></i>
+
+                Recent Activity
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="activity-item">
+
+                    <i class="bi bi-journal-check text-success"></i>
+
+                    <div>
+
+                        <strong>Latest Blog Published</strong>
+
+                        <small><?= count($latestBlogs) ? e($latestBlogs[0]['title']) : "No activity yet." ?></small>
+
+                    </div>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="bi bi-envelope text-primary"></i>
+
+                    <div>
+
+                        <strong>Latest Lead</strong>
+
+                        <small><?= count($latestLeads) ? e($latestLeads[0]['full_name']) : "No leads received." ?></small>
+
+                    </div>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <i class="bi bi-folder2-open text-warning"></i>
+
+                    <div>
+
+                        <strong>Portfolio Projects</strong>
+
+                        <small><?= $portfolioCount ?> Total Projects</small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Server Info -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header">
+
+                <i class="bi bi-cpu me-2"></i>
+
+                Server Information
+
+            </div>
+
+            <div class="card-body">
+
+                <table class="table table-borderless overview-table mb-0">
+
+                    <tr>
+
+                        <td>PHP Version</td>
+
+                        <td><?= $phpVersion ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>MySQL</td>
+
+                        <td><?= $mysqlVersion ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Timezone</td>
+
+                        <td><?= $timezone ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Memory Limit</td>
+
+                        <td><?= $memoryLimit ?></td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Upload Limit</td>
+
+                        <td><?= $uploadLimit ?></td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
 <script>
+
+    document.addEventListener("DOMContentLoaded",function(){
+
+document.querySelectorAll(".progress-bar").forEach(bar=>{
+
+const width = bar.style.width;
+
+bar.style.width="0";
+
+setTimeout(()=>{
+
+bar.style.width=width;
+
+},300);
+
+});
+
+});
 
 const monthlyLeadChart = new Chart(
 document.getElementById('monthlyLeadsChart'),
@@ -555,15 +1136,82 @@ document.getElementById('monthlyLeadsChart'),
 
         datasets:[{
 
-            label:'Leads',
+    label:'Leads',
 
-            data:[
-                0,0,0,0,0,0,0,0,0,0,0,0
-            ],
+    data: <?= json_encode($monthlyLeads) ?>,
 
-            backgroundColor:'#4A8BE2',
+    backgroundColor:'#4A8BE2',
 
-            borderRadius:8
+    borderRadius:8
+
+}]
+
+    },
+
+    options:{
+
+        responsive:true,
+
+        plugins:{
+
+            legend:{
+                display:false
+            }
+
+        },
+
+        scales:{
+
+            y:{
+                beginAtZero:true
+            }
+
+        }
+
+    }
+
+});
+
+
+const monthlyBlogChart = new Chart(
+document.getElementById('monthlyBlogChart'),
+{
+    type:'line',
+
+    data:{
+
+        labels:[
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
+
+        datasets:[{
+
+            label:'Blog Posts',
+
+            data: <?= json_encode($monthlyBlogs) ?>,
+
+            borderColor:'#465F87',
+
+            backgroundColor:'rgba(70,95,135,.12)',
+
+            fill:true,
+
+            tension:.35,
+
+            pointRadius:5,
+
+            pointHoverRadius:7
 
         }]
 
@@ -667,13 +1315,140 @@ position:'bottom'
 
 });
 
-if(totalLeads > 0){
+const last7DaysChart = new Chart(
 
-    document.querySelector('.chart-empty').style.display='none';
+document.getElementById('last7DaysChart'),
 
-    // Initialize Chart.js
+{
+
+type:'line',
+
+data:{
+
+labels: <?= json_encode($last7DaysLabels) ?>,
+
+datasets:[{
+
+label:'Leads',
+
+data: <?= json_encode($last7DaysCount) ?>,
+
+borderColor:'#4A8BE2',
+
+backgroundColor:'rgba(74,139,226,.12)',
+
+fill:true,
+
+tension:.4,
+
+pointRadius:5,
+
+pointHoverRadius:7
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+display:false
 
 }
+
+},
+
+scales:{
+
+y:{
+
+beginAtZero:true,
+
+ticks:{
+
+precision:0
+
+}
+
+}
+
+}
+
+}
+
+});
+
+const leadSummaryChart = new Chart(
+
+document.getElementById('leadSummaryChart'),
+
+{
+
+type:'doughnut',
+
+data:{
+
+labels:[
+'New',
+'Contacted',
+'Converted',
+'Closed'
+],
+
+datasets:[{
+
+data:[
+
+<?= $leadSummary['New'] ?>,
+
+<?= $leadSummary['Contacted'] ?>,
+
+<?= $leadSummary['Converted'] ?>,
+
+<?= $leadSummary['Closed'] ?>
+
+],
+
+backgroundColor:[
+
+'#4A8BE2',
+
+'#0dcaf0',
+
+'#198754',
+
+'#6c757d'
+
+],
+
+borderWidth:0
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+position:'bottom'
+
+}
+
+}
+
+}
+
+});
 
 </script>
 
