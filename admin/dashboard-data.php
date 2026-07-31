@@ -164,29 +164,6 @@ foreach($last7Days as $date => $count){
 }
 
 /* ===========================
-   Lead Conversion Summary
-=========================== */
-
-$leadSummary = [
-    'New' => 0,
-    'Contacted' => 0,
-    'Converted' => 0,
-    'Closed' => 0
-];
-
-$stmt = $pdo->query("
-SELECT status, COUNT(*) total
-FROM contact_leads
-GROUP BY status
-");
-
-while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-
-    $leadSummary[$row['status']] = (int)$row['total'];
-
-}
-
-/* ===========================
    Lead Pipeline Summary
 =========================== */
 
@@ -218,4 +195,51 @@ if($totalPipelineLeads == 0){
 }
 
 
+/* ==========================================
+   Top Requested Services
+========================================== */
 
+$serviceAnalytics = $pdo->query("
+SELECT
+    services.title,
+    COUNT(contact_leads.id) AS total
+FROM services
+LEFT JOIN contact_leads
+ON services.id = contact_leads.service_id
+GROUP BY services.id
+ORDER BY total DESC
+")->fetchAll(PDO::FETCH_ASSOC);
+
+$serviceLabels = [];
+$serviceTotals = [];
+
+foreach($serviceAnalytics as $row){
+
+    $serviceLabels[] = $row['title'];
+
+    $serviceTotals[] = (int)$row['total'];
+
+}
+
+/* ======================================
+   Lead Sources
+====================================== */
+
+$leadSources = $pdo->query("
+SELECT
+source,
+COUNT(*) total
+FROM contact_leads
+GROUP BY source
+")->fetchAll(PDO::FETCH_ASSOC);
+
+$sourceLabels = [];
+$sourceTotals = [];
+
+foreach($leadSources as $row){
+
+    $sourceLabels[] = $row['source'];
+
+    $sourceTotals[] = (int)$row['total'];
+
+}

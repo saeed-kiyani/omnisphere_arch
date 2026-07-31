@@ -1,14 +1,14 @@
 <div class="sidebar">
 
     <div class="logo">
-        <img src="http://localhost/OmniSphere/admin/assets/images/sidebarlogo.png" width="70px" height="70px" />
-        <h5>OmniSphere<br><span class="h6">ARCHITECTURE</span></h5>
+        <img src="http://localhost/OmniSphere/admin/assets/images/sidebarlogo.png" width="140px" height="115px" />
+        <!-- <h5>OmniSphere<br><span class="h6">ARCHITECTURE</span></h5> -->
     </div>
 
     <ul>
 
         <li>
-            <a href="/OmniSphere/admin/dashboard.php">
+            <a href="/OmniSphere/admin/dashboard.php" class="active">
                 Dashboard
             </a>
         </li>

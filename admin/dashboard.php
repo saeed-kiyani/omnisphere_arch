@@ -15,12 +15,6 @@ include 'includes/topbar.php';
 
 <div class="content">
 
-<p class="text-muted mb-4 text-center">
-
-    Welcome back! Here's what's happening across OmniSphere Architecture today.
-
-</p>
-
 <!-- ===========================
 Primary KPI Cards
 =========================== -->
@@ -338,104 +332,6 @@ Lead Conversion Summary
 
 <div class="card-header">
 
-<i class="bi bi-bar-chart-line me-2"></i>
-
-Lead Pipeline
-
-</div>
-
-<div class="card-body">
-
-<div class="mb-3">
-
-<div class="d-flex justify-content-between">
-
-<span>New</span>
-
-<strong><?= $leadSummary['New'] ?></strong>
-
-</div>
-
-<div class="progress">
-
-<div
-class="progress-bar bg-primary"
-style="width:<?= max(5,$leadSummary['New']*10) ?>%">
-</div>
-
-</div>
-
-</div>
-
-<div class="mb-3">
-
-<div class="d-flex justify-content-between">
-
-<span>Contacted</span>
-
-<strong><?= $leadSummary['Contacted'] ?></strong>
-
-</div>
-
-<div class="progress">
-
-<div
-class="progress-bar bg-info"
-style="width:<?= max(5,$leadSummary['Contacted']*10) ?>%">
-</div>
-
-</div>
-
-</div>
-
-<div class="mb-3">
-
-<div class="d-flex justify-content-between">
-
-<span>Converted</span>
-
-<strong><?= $leadSummary['Converted'] ?></strong>
-
-</div>
-
-<div class="progress">
-
-<div
-class="progress-bar bg-success"
-style="width:<?= max(5,$leadSummary['Converted']*10) ?>%">
-</div>
-
-</div>
-
-</div>
-
-<div>
-
-<div class="d-flex justify-content-between">
-
-<span>Closed</span>
-
-<strong><?= $leadSummary['Closed'] ?></strong>
-
-</div>
-
-<div class="progress">
-
-<div
-class="progress-bar bg-secondary"
-style="width:<?= max(5,$leadSummary['Closed']*10) ?>%">
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="dashboard-card">
-
-<div class="card-header">
-
 <h5>
 
 <i class="bi bi-funnel me-2"></i>
@@ -517,6 +413,58 @@ style="width:<?= $percent ?>%;"
 
 <div class="row mt-4">
 
+<div class="col-lg-12">
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<i class="bi bi-bar-chart-line me-2"></i>
+
+Top Requested Services
+
+</div>
+
+<div class="card-body">
+
+<canvas id="serviceAnalyticsChart" height="110"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
+<div class="col-lg-6">
+
+<div class="card dashboard-card">
+
+<div class="card-header">
+
+<i class="bi bi-share me-2"></i>
+
+Lead Sources
+
+</div>
+
+<div class="card-body">
+
+<canvas id="leadSourcesChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="row mt-4">
+
     <!-- Latest Leads -->
 
     <div class="col-lg-6 mb-4">
@@ -580,16 +528,6 @@ style="width:<?= $percent ?>%;"
     <?php endforeach; ?>
 
 <?php else: ?>
-
-<tr>
-
-    <td colspan="3" class="text-center py-4">
-
-        No leads yet.
-
-    </td>
-
-</tr>
 
 <?php endif; ?>
 
@@ -1092,6 +1030,10 @@ style="width:<?= $percent ?>%;"
 
 </div>
 
+</div>
+
+        <!-- JAVASCRIPT SCRIPT START -->
+
 <script>
 
     document.addEventListener("DOMContentLoaded",function(){
@@ -1394,35 +1336,154 @@ type:'doughnut',
 data:{
 
 labels:[
+
 'New',
+
 'Contacted',
-'Converted',
-'Closed'
+
+'Quotation Sent',
+
+'Won',
+
+'Lost'
+
 ],
 
 datasets:[{
 
 data:[
 
-<?= $leadSummary['New'] ?>,
+<?= $leadPipeline['New'] ?>,
 
-<?= $leadSummary['Contacted'] ?>,
+<?= $leadPipeline['Contacted'] ?>,
 
-<?= $leadSummary['Converted'] ?>,
+<?= $leadPipeline['Quotation Sent'] ?>,
 
-<?= $leadSummary['Closed'] ?>
+<?= $leadPipeline['Won'] ?>,
+
+<?= $leadPipeline['Lost'] ?>
 
 ],
 
 backgroundColor:[
 
+'#4A8BE2',   // New
+
+'#0dcaf0',   // Contacted
+
+'#ffc107',   // Quotation Sent
+
+'#198754',   // Won
+
+'#dc3545'    // Lost
+
+],
+
+borderWidth:0
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+plugins:{
+
+legend:{
+
+position:'bottom'
+
+}
+
+}
+
+}
+
+});
+
+const serviceAnalyticsChart = new Chart(
+
+document.getElementById('serviceAnalyticsChart'),
+
+{
+
+type:'bar',
+
+data:{
+
+labels:<?= json_encode($serviceLabels) ?>,
+
+datasets:[{
+
+label:'Leads',
+
+data:<?= json_encode($serviceTotals) ?>,
+
+backgroundColor:'#4A8BE2',
+
+borderRadius:8
+
+}]
+
+},
+
+options:{
+
+indexAxis:'y',
+
+responsive:true,
+
+plugins:{
+
+legend:{
+display:false
+}
+
+},
+
+scales:{
+
+x:{
+beginAtZero:true
+}
+
+}
+
+}
+
+});
+
+const leadSourcesChart = new Chart(
+
+document.getElementById('leadSourcesChart'),
+
+{
+
+type:'doughnut',
+
+data:{
+
+labels:<?= json_encode($sourceLabels) ?>,
+
+datasets:[{
+
+data:<?= json_encode($sourceTotals) ?>,
+
+backgroundColor:[
+
 '#4A8BE2',
 
-'#0dcaf0',
+'#25D366',
 
-'#198754',
+'#1877F2',
 
-'#6c757d'
+'#E4405F',
+
+'#0A66C2',
+
+'#F4B400'
 
 ],
 
@@ -1451,6 +1512,8 @@ position:'bottom'
 });
 
 </script>
+
+        <!-- JAVASCRIPT SCRIPT END -->
 
 <?php
 

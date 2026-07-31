@@ -45,12 +45,14 @@
 
         min-height:100vh;
 
-        background: #002245;
-
-        color:#fff;
+        background: #F5F7FA;
 
         position:fixed;
 
+    }
+
+    .sidebar .active {
+        background: #C79C55;
     }
 
     .logo{
@@ -85,7 +87,7 @@
 
     .sidebar a{
 
-        color:#fff;
+        color:#091B31;
 
         display:block;
 
