@@ -25,7 +25,7 @@ include '../includes/topbar.php';
 
 <h2>Team Members</h2>
 
-<a href="create.php" class="btn btn-primary">
+<a href="create.php" class="btn btn-primary add-btn">
 <i class="bi bi-plus-circle"></i>
 Add Team Member
 </a>
@@ -58,9 +58,9 @@ Add Team Member
 
 <table class="table table-bordered table-hover align-middle">
 
-<thead class="table-dark">
+<thead class="table text-center">
 
-<tr>
+<tr class="thead-row">
 
 <th width="90">Photo</th>
 

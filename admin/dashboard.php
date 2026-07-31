@@ -216,7 +216,7 @@ Secondary KPI Cards
 
         <div class="card dashboard-card">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
                 Monthly Leads
             </div>
 
@@ -234,7 +234,7 @@ Secondary KPI Cards
 
         <div class="card dashboard-card">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
                 Website Content Distribution
             </div>
 
@@ -256,7 +256,7 @@ Secondary KPI Cards
 
         <div class="card dashboard-card">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
 
                 <i class="bi bi-journal-text me-2"></i>
 
@@ -282,7 +282,7 @@ Secondary KPI Cards
 
 <div class="card dashboard-card">
 
-<div class="card-header">
+<div class="card-header" style="color: #08192B;">
 
 <i class="bi bi-graph-up-arrow me-2"></i>
 
@@ -308,7 +308,7 @@ Latest 7-Day Leads Trend
 
 <div class="card dashboard-card">
 
-<div class="card-header">
+<div class="card-header" style="color: #08192B;">
 
 <i class="bi bi-funnel me-2"></i>
 
@@ -330,7 +330,7 @@ Lead Conversion Summary
 
 <div class="card dashboard-card">
 
-<div class="card-header">
+<div class="card-header" style="color: #08192B;">
 
 <h5>
 
@@ -417,7 +417,7 @@ style="width:<?= $percent ?>%;"
 
 <div class="card dashboard-card">
 
-<div class="card-header">
+<div class="card-header" style="color: #08192B;">
 
 <i class="bi bi-bar-chart-line me-2"></i>
 
@@ -443,7 +443,7 @@ Top Requested Services
 
 <div class="card dashboard-card">
 
-<div class="card-header">
+<div class="card-header" style="color: #08192B;">
 
 <i class="bi bi-share me-2"></i>
 
@@ -471,7 +471,7 @@ Lead Sources
 
         <div class="card dashboard-card">
 
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header d-flex justify-content-between" style="color: #08192B;">
 
     <span>
         <i class="bi bi-envelope-paper me-2"></i>
@@ -549,7 +549,7 @@ Lead Sources
 
         <div class="card dashboard-card">
 
-            <div class="card-header d-flex justify-content-between">
+            <div class="card-header d-flex justify-content-between" style="color: #08192B;">
 
     <span>
         <i class="bi bi-journal-text me-2"></i>
@@ -651,9 +651,9 @@ Lead Sources
 <div class="row mt-4">
 
     <div class="col-12 mb-3">
-        <h4 class="dashboard-section-title">
+        <h6 class="dashboard-section-title" style="color: #08192B;">
             Quick Actions
-        </h4>
+        </h6>
     </div>
 
     <div class="col-lg-2 col-md-4 col-sm-6 mb-4">
@@ -762,7 +762,7 @@ Lead Sources
 
         <div class="card dashboard-card h-100">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
 
                 <i class="bi bi-globe me-2"></i>
 
@@ -846,7 +846,7 @@ Lead Sources
 
         <div class="card dashboard-card h-100">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
 
                 <i class="bi bi-database me-2"></i>
 
@@ -900,7 +900,7 @@ Lead Sources
 
         <div class="card dashboard-card h-100">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
 
                 <i class="bi bi-clock-history me-2"></i>
 
@@ -966,7 +966,7 @@ Lead Sources
 
         <div class="card dashboard-card h-100">
 
-            <div class="card-header">
+            <div class="card-header" style="color: #08192B;">
 
                 <i class="bi bi-cpu me-2"></i>
 
@@ -1082,7 +1082,7 @@ document.getElementById('monthlyLeadsChart'),
 
     data: <?= json_encode($monthlyLeads) ?>,
 
-    backgroundColor:'#4A8BE2',
+    backgroundColor:'#B37D37',
 
     borderRadius:8
 
@@ -1143,7 +1143,7 @@ document.getElementById('monthlyBlogChart'),
 
             data: <?= json_encode($monthlyBlogs) ?>,
 
-            borderColor:'#465F87',
+            borderColor:'#455123',
 
             backgroundColor:'rgba(70,95,135,.12)',
 
@@ -1223,13 +1223,13 @@ data:[
 
 backgroundColor:[
 
-'#4A8BE2',
+'#455123',
 
-'#465F87',
+'#B37D37',
 
 '#6C8ECF',
 
-'#C4A574'
+'#08192B'
 
 ],
 
@@ -1275,7 +1275,7 @@ label:'Leads',
 
 data: <?= json_encode($last7DaysCount) ?>,
 
-borderColor:'#4A8BE2',
+borderColor:'#08192B',
 
 backgroundColor:'rgba(74,139,226,.12)',
 
@@ -1367,15 +1367,15 @@ data:[
 
 backgroundColor:[
 
-'#4A8BE2',   // New
+'#08192B',   // New
 
-'#0dcaf0',   // Contacted
+'#6C8ECF',   // Contacted
 
-'#ffc107',   // Quotation Sent
+'#B37D37',   // Quotation Sent
 
-'#198754',   // Won
+'#455123',   // Won
 
-'#dc3545'    // Lost
+'red'    // Lost
 
 ],
 
@@ -1421,7 +1421,7 @@ label:'Leads',
 
 data:<?= json_encode($serviceTotals) ?>,
 
-backgroundColor:'#4A8BE2',
+backgroundColor:'#B37D37',
 
 borderRadius:8
 
@@ -1473,17 +1473,15 @@ data:<?= json_encode($sourceTotals) ?>,
 
 backgroundColor:[
 
-'#4A8BE2',
+'#374DDA',
 
-'#25D366',
+'#57F175',
 
-'#1877F2',
+'#1773EA',
 
-'#E4405F',
+'#0E72A3',
 
-'#0A66C2',
-
-'#F4B400'
+'#0A66C2'
 
 ],
 

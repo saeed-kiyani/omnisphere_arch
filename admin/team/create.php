@@ -19,8 +19,8 @@ include '../includes/topbar.php';
 
 <h2>Add Team Member</h2>
 
-<a href="index.php" class="btn btn-secondary">
-Back
+<a href="index.php" class="btn btn-secondary back-btn">
+← Back to Team Members
 </a>
 
 </div>
@@ -245,7 +245,7 @@ Draft
 
 <button
 type="submit"
-class="btn btn-primary">
+class="btn btn-primary back-btn">
 
 Save Team Member
 
@@ -253,7 +253,7 @@ Save Team Member
 
 <a
 href="index.php"
-class="btn btn-secondary">
+class="btn btn-warning">
 
 Cancel
 

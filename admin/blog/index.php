@@ -35,7 +35,7 @@ include '../includes/topbar.php';
 
 <h2>Blog Posts</h2>
 
-<a href="create.php" class="btn btn-primary">
+<a href="create.php" class="btn btn-primary add-btn">
 
 <i class="bi bi-plus-circle"></i>
 
@@ -61,9 +61,9 @@ Add New Blog
 
 <table class="table table-bordered table-hover align-middle">
 
-<thead class="table-dark">
+<thead class="table text-center">
 
-<tr>
+<tr class="thead-row">
 
 <th width="80">Image</th>
 

@@ -1,6 +1,8 @@
 <?php
 if (!isset($pageTitle)) {
+
     $pageTitle = "Admin Panel";
+
 }
 ?>
 

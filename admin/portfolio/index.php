@@ -36,7 +36,7 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <h2>Portfolio Projects</h2>
 
-        <a href="create.php" class="btn btn-primary">
+        <a href="create.php" class="btn btn-primary add-btn">
             + Add New Project
         </a>
 
@@ -62,9 +62,9 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <table class="table table-bordered table-hover align-middle">
 
-                    <thead class="table-dark">
+                    <thead class="table text-center">
 
-                        <tr>
+                        <tr class="thead-row">
 
                             <th width="80">Image</th>
 

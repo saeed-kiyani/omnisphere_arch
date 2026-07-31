@@ -27,8 +27,8 @@ include '../includes/topbar.php';
 
         <h2>Add Portfolio Project</h2>
 
-        <a href="index.php" class="btn btn-secondary">
-            ← Back
+        <a href="index.php" class="btn btn-secondary back-btn">
+            ← Back to Portfolio
         </a>
 
     </div>
@@ -347,7 +347,7 @@ class="row mt-3">
 
                 <button
                     type="submit"
-                    class="btn btn-primary">
+                    class="btn btn-primary back-btn">
 
                     Save Project
 
@@ -355,7 +355,7 @@ class="row mt-3">
 
                 <a
                     href="index.php"
-                    class="btn btn-secondary">
+                    class="btn btn-warning">
 
                     Cancel
 

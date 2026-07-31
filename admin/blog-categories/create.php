@@ -19,8 +19,8 @@ include '../includes/topbar.php';
 
 <h2>Add Blog Category</h2>
 
-<a href="index.php" class="btn btn-secondary">
-Back
+<a href="index.php" class="btn btn-secondary back-btn">
+← Back to Blog Categories
 </a>
 
 </div>
@@ -151,7 +151,7 @@ Draft
 
 <button
 type="submit"
-class="btn btn-primary">
+class="btn btn-primary back-btn">
 
 Save Category
 
@@ -159,7 +159,7 @@ Save Category
 
 <a
 href="index.php"
-class="btn btn-secondary">
+class="btn btn-warning">
 
 Cancel
 

@@ -43,7 +43,7 @@ $leads = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <a
 href="export.php"
-class="btn btn-success">
+class="btn btn-success add-btn">
 
 <i class="bi bi-download"></i>
 
@@ -87,9 +87,9 @@ Export CSV
 
 <table class="table table-bordered table-hover align-middle">
 
-<thead class="table-dark">
+<thead class="table text-center">
 
-<tr>
+<tr class="thead-row">
 
 <th width="70">ID</th>
 

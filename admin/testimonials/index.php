@@ -28,7 +28,7 @@ $testimonials = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <h1 class="mb-0">Testimonials</h1>
 
-<a href="create.php" class="btn btn-primary">
+<a href="create.php" class="btn btn-primary add-btn">
 <i class="bi bi-plus-lg"></i>
 Add New Testimonial
 </a>
@@ -67,9 +67,9 @@ Add New Testimonial
 
 <table class="table table-bordered table-hover align-middle mb-0">
 
-<thead class="table-dark">
+<thead class="table text-center">
 
-<tr>
+<tr class="thead-row">
 
 <th width="80">Photo</th>
 

@@ -12,7 +12,7 @@ include '../includes/topbar.php';
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>Add New Service</h2>
 
-        <a href="index.php" class="btn btn-secondary">
+        <a href="index.php" class="btn btn-secondary back-btn">
             ← Back to Services
         </a>
     </div>
@@ -205,7 +205,7 @@ include '../includes/topbar.php';
 
                 <button
                     type="submit"
-                    class="btn btn-primary">
+                    class="btn btn-primary back-btn">
 
                     Save Service
 
@@ -213,7 +213,7 @@ include '../includes/topbar.php';
 
                 <a
                     href="index.php"
-                    class="btn btn-secondary">
+                    class="btn btn-warning">
 
                     Cancel
 

@@ -4,11 +4,7 @@
 
 <div>
 
-<h4>
-
-<?= e($pageTitle) ?>
-
-</h4>
+<h4 class="page-title"><?= $pageTitle ?></h4>
 
 </div>
 

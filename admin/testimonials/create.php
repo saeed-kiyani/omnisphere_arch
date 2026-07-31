@@ -17,8 +17,8 @@ include '../includes/topbar.php';
 
 <h2>Add New Testimonial</h2>
 
-<a href="index.php" class="btn btn-secondary">
-    <i class="bi bi-arrow-left"></i> Back
+<a href="index.php" class="btn btn-secondary back-btn">
+    <i class="bi bi-arrow-left"></i> ← Back to Testimonials
 </a>
 
 </div>
@@ -230,7 +230,7 @@ required></textarea>
 
 <button
 type="submit"
-class="btn btn-primary">
+class="btn btn-primary back-btn">
 
 <i class="bi bi-save"></i>
 
@@ -240,7 +240,7 @@ Save Testimonial
 
 <a
 href="index.php"
-class="btn btn-secondary">
+class="btn btn-warning">
 
 Cancel
 
