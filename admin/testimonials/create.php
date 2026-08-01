@@ -149,25 +149,17 @@ value="0">
 
 <!-- Featured -->
 
-<div class="col-md-6 mb-3">
-
-<label class="form-label">
-
-Featured
-
-</label>
-
 <select
 name="featured"
 class="form-select">
 
-<option value="Yes">
+<option value="1">
 
 Yes
 
 </option>
 
-<option value="No" selected>
+<option value="0" selected>
 
 No
 

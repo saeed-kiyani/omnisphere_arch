@@ -159,13 +159,17 @@ for($i=1;$i<=5;$i++){
 
 <td>
 
-<?php if($row['featured']=="Yes"): ?>
+<?php if ((int)$row['featured'] === 1): ?>
 
-<span class="badge bg-success">Yes</span>
+    <span class="badge bg-success">
+        Yes
+    </span>
 
 <?php else: ?>
 
-<span class="badge bg-secondary">No</span>
+    <span class="badge bg-secondary">
+        No
+    </span>
 
 <?php endif; ?>
 

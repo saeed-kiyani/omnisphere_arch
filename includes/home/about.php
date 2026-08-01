@@ -9,7 +9,7 @@
             <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right">
 
                 <img
-                    src="<?= asset('images/about.jpg'); ?>"
+                    src="<?= asset('images/about.png'); ?>"
                     alt="About <?= e(setting('company_name')); ?>"
                     class="img-fluid rounded shadow">
 

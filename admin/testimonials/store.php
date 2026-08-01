@@ -26,7 +26,9 @@ $designation    = trim($_POST['designation']);
 $company_name   = trim($_POST['company_name']);
 $rating         = (int) $_POST['rating'];
 $review         = trim($_POST['review']);
-$featured       = trim($_POST['featured']);
+$featured = isset($_POST['featured'])
+    ? (int) $_POST['featured']
+    : 0;
 $display_order  = (int) $_POST['display_order'];
 $status         = trim($_POST['status']);
 

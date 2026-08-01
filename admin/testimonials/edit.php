@@ -226,16 +226,16 @@ name="featured"
 class="form-select">
 
 <option
-value="Yes"
-<?= ($testimonial['featured']=="Yes") ? 'selected' : ''; ?>>
+value="1"
+<?= ((int)$testimonial['featured'] === 1) ? 'selected' : ''; ?>>
 
 Yes
 
 </option>
 
 <option
-value="No"
-<?= ($testimonial['featured']=="No") ? 'selected' : ''; ?>>
+value="0"
+<?= ((int)$testimonial['featured'] === 0) ? 'selected' : ''; ?>>
 
 No
 
