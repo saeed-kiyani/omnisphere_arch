@@ -12,7 +12,7 @@ $logo = !empty($settings['logo'])
 Footer Start
 =========================== -->
 
-<footer class="footer bg-dark text-white pt-5">
+<footer class="footer bg-dark text-white pt-5 os-footer">
 
     <div class="container">
 
@@ -92,9 +92,10 @@ Footer Start
                     <i class="bi bi-whatsapp me-2"></i>
 
                     <a
-                        href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp']); ?>"
-                        target="_blank"
-                        class="text-white text-decoration-none">
+    href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $settings['whatsapp']); ?>"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="text-white text-decoration-none">
 
                         <?= e($settings['whatsapp']); ?>
 
@@ -119,8 +120,9 @@ Footer Start
                     <?php if(!empty($settings['facebook'])): ?>
 
                     <a
-                        href="<?= e($settings['facebook']); ?>"
-                        target="_blank">
+    href="<?= e($settings['facebook']); ?>"
+    target="_blank"
+    rel="noopener noreferrer">
 
                         <i class="bi bi-facebook"></i>
 
@@ -131,8 +133,9 @@ Footer Start
                     <?php if(!empty($settings['instagram'])): ?>
 
                     <a
-                        href="<?= e($settings['instagram']); ?>"
-                        target="_blank">
+    href="<?= e($settings['instagram']); ?>"
+    target="_blank"
+    rel="noopener noreferrer">
 
                         <i class="bi bi-instagram"></i>
 
@@ -143,8 +146,9 @@ Footer Start
                     <?php if(!empty($settings['linkedin'])): ?>
 
                     <a
-                        href="<?= e($settings['linkedin']); ?>"
-                        target="_blank">
+    href="<?= e($settings['linkedin']); ?>"
+    target="_blank"
+    rel="noopener noreferrer">
 
                         <i class="bi bi-linkedin"></i>
 
@@ -155,8 +159,9 @@ Footer Start
                     <?php if(!empty($settings['youtube'])): ?>
 
                     <a
-                        href="<?= e($settings['youtube']); ?>"
-                        target="_blank">
+    href="<?= e($settings['youtube']); ?>"
+    target="_blank"
+    rel="noopener noreferrer">
 
                         <i class="bi bi-youtube"></i>
 

@@ -1,99 +1,267 @@
 <?php
 
-$projects = getFeaturedPortfolio();
+/*
+|--------------------------------------------------------------------------
+| Featured Portfolio Projects
+|--------------------------------------------------------------------------
+| Homepage shows only published + featured projects.
+|--------------------------------------------------------------------------
+*/
+
+$portfolioStmt = $pdo->query("
+    SELECT
+        p.id,
+        p.title,
+        p.slug,
+        p.location,
+        p.project_year,
+        p.project_status,
+        p.thumbnail,
+        p.short_description,
+        s.title AS service_title
+    FROM portfolio p
+
+    LEFT JOIN services s
+        ON p.service_id = s.id
+
+    WHERE
+        p.status = 'Published'
+        AND p.featured = 1
+
+    ORDER BY
+        p.id DESC
+
+    LIMIT 3
+");
+
+$featuredPortfolio = $portfolioStmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<section class="py-5 bg-white">
+<!-- =========================================================
+     FEATURED PORTFOLIO
+========================================================= -->
 
-<div class="container">
+<section
+    class="os-section os-section-light"
+    id="featured-portfolio">
 
-<div class="text-center mb-5">
+    <div class="container">
 
-<span class="text-primary fw-semibold">
+        <!-- Section Header -->
 
-PORTFOLIO
+        <div
+            class="os-section-header"
+            data-aos="fade-up">
 
-</span>
+            <span class="os-section-eyebrow">
+                Our Portfolio
+            </span>
 
-<h2 class="fw-bold mt-2">
+            <h2 class="os-section-title">
+                Selected Projects
+            </h2>
 
-Featured Projects
+            <p class="os-section-description">
 
-</h2>
+                Explore a selection of architectural,
+                interior and design projects created
+                by OmniSphere Architecture.
 
-<p class="text-muted">
+            </p>
 
-Explore some of our latest architectural and interior design projects.
+        </div>
 
-</p>
 
-</div>
+        <?php if (!empty($featuredPortfolio)): ?>
 
-<div class="row g-4">
+            <div class="row g-4">
 
-<?php foreach($projects as $project): ?>
+                <?php foreach ($featuredPortfolio as $project): ?>
 
-<div class="col-lg-4 col-md-6">
+                    <?php
 
-<div class="card border-0 shadow-sm h-100">
+                    /*
+                    |--------------------------------------------------------------------------
+                    | Project Image
+                    |--------------------------------------------------------------------------
+                    */
 
-<img
-src="<?= imageUrl('portfolio', $project['thumbnail']); ?>"
-class="card-img-top"
-style="height:250px;object-fit:cover;"
-alt="<?= e($project['title']); ?>">
+                    $projectImage = !empty($project['thumbnail'])
+                        ? upload('portfolio/' . $project['thumbnail'])
+                        : asset('images/portfolio-placeholder.jpg');
 
-<div class="card-body">
+                    ?>
 
-<h5 class="fw-bold">
 
-<?= e($project['title']); ?>
+                    <div
+                        class="col-lg-4 col-md-6"
+                        data-aos="fade-up">
 
-</h5>
+                        <article class="os-portfolio-card">
 
-<p class="text-muted small mb-2">
 
-<?= e($project['location']); ?>
+                            <!-- Project Image -->
 
-</p>
+                            <a
+                                href="<?= SITE_URL; ?>/project-details.php?slug=<?= urlencode($project['slug']); ?>"
+                                class="os-portfolio-image">
 
-<p>
+                                <img
+                                    src="<?= e($projectImage); ?>"
+                                    alt="<?= e($project['title']); ?>"
+                                    loading="lazy">
 
-<?= e($project['short_description']); ?>
+                                <span class="os-portfolio-overlay">
 
-</p>
+                                    <i class="bi bi-arrow-up-right"></i>
 
-<a
-href="project-details.php?slug=<?= e($project['slug']); ?>"
-class="btn btn-outline-primary btn-sm">
+                                </span>
 
-View Project
+                            </a>
 
-</a>
 
-</div>
+                            <!-- Project Content -->
 
-</div>
+                            <div class="os-portfolio-content">
 
-</div>
 
-<?php endforeach; ?>
+                                <?php if (!empty($project['service_title'])): ?>
 
-</div>
+                                    <span class="os-portfolio-category">
 
-<div class="text-center mt-5">
+                                        <?= e($project['service_title']); ?>
 
-<a
-href="portfolio.php"
-class="btn btn-primary px-4">
+                                    </span>
 
-View All Projects
+                                <?php endif; ?>
 
-</a>
 
-</div>
+                                <h3 class="os-portfolio-title">
 
-</div>
+                                    <a
+                                        href="<?= SITE_URL; ?>/project-details.php?slug=<?= urlencode($project['slug']); ?>">
+
+                                        <?= e($project['title']); ?>
+
+                                    </a>
+
+                                </h3>
+
+
+                                <?php if (!empty($project['short_description'])): ?>
+
+                                    <p class="os-portfolio-description">
+
+                                        <?= e($project['short_description']); ?>
+
+                                    </p>
+
+                                <?php endif; ?>
+
+
+                                <div class="os-portfolio-meta">
+
+
+                                    <?php if (!empty($project['location'])): ?>
+
+                                        <span>
+
+                                            <i class="bi bi-geo-alt me-1"></i>
+
+                                            <?= e($project['location']); ?>
+
+                                        </span>
+
+                                    <?php endif; ?>
+
+
+                                    <?php if (!empty($project['project_year'])): ?>
+
+                                        <span>
+
+                                            <i class="bi bi-calendar3 me-1"></i>
+
+                                            <?= e($project['project_year']); ?>
+
+                                        </span>
+
+                                    <?php endif; ?>
+
+
+                                </div>
+
+
+                                <a
+                                    href="<?= SITE_URL; ?>/project-details.php?slug=<?= urlencode($project['slug']); ?>"
+                                    class="os-portfolio-link">
+
+                                    View Project
+
+                                    <i class="bi bi-arrow-right"></i>
+
+                                </a>
+
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                <?php endforeach; ?>
+
+            </div>
+
+
+            <!-- View All Portfolio -->
+
+            <div
+                class="text-center mt-5"
+                data-aos="fade-up">
+
+                <a
+                    href="<?= SITE_URL; ?>/portfolio.php"
+                    class="os-btn os-btn-primary">
+
+                    View All Projects
+
+                    <i class="bi bi-arrow-right"></i>
+
+                </a>
+
+            </div>
+
+
+        <?php else: ?>
+
+
+            <!-- Empty State -->
+
+            <div
+                class="os-portfolio-empty"
+                data-aos="fade-up">
+
+                <div class="os-portfolio-empty-icon">
+
+                    <i class="bi bi-building"></i>
+
+                </div>
+
+                <h3>
+                    Our Portfolio Is Coming Soon
+                </h3>
+
+                <p>
+                    We're currently preparing our featured
+                    projects. Please check back soon.
+                </p>
+
+            </div>
+
+
+        <?php endif; ?>
+
+    </div>
 
 </section>

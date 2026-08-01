@@ -12,7 +12,10 @@ $logo = !empty($settings['logo'])
 Navbar Start
 =========================== -->
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+<nav
+    class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top os-navbar"
+    id="mainNavigation"
+>
 
     <div class="container">
 
@@ -42,14 +45,16 @@ Navbar Start
         </a>
 
         <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#mainNavbar">
-
-            <span class="navbar-toggler-icon"></span>
-
-        </button>
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#mainNavbar"
+    aria-controls="mainNavbar"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+>
+    <span class="navbar-toggler-icon"></span>
+</button>
 
         <div
             class="collapse navbar-collapse"
@@ -153,9 +158,11 @@ Navbar Start
                 <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
 
                     <a
-                        href="https://wa.me/<?= preg_replace('/[^0-9]/', '', setting('whatsapp')); ?>"
-                        target="_blank"
-                        class="btn btn-primary">
+    href="https://wa.me/923339266678<?= preg_replace('/[^0-9]/', '', setting('whatsapp')); ?>"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-primary os-navbar-cta"
+>
 
                         <i class="bi bi-whatsapp me-2"></i>
 

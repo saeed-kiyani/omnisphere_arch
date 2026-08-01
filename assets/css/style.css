@@ -591,3 +591,1619 @@ Portfolio Section
     margin-bottom:0;
 
 }
+
+/* ==================================================
+   OMNISPHERE GLOBAL NAVBAR
+================================================== */
+
+.os-navbar {
+
+    transition:
+        box-shadow .3s ease,
+        padding .3s ease,
+        background-color .3s ease;
+
+}
+
+
+/* Logo */
+
+.os-navbar .navbar-logo {
+
+    max-height: 58px;
+
+    width: auto;
+
+    object-fit: contain;
+
+}
+
+
+/* Brand name */
+
+.os-navbar .navbar-brand strong {
+
+    color: #08192B;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: .2px;
+
+}
+
+
+/* Tagline */
+
+.os-navbar .navbar-brand small {
+
+    font-size: 11px;
+
+    line-height: 1.3;
+
+}
+
+
+/* Navigation links */
+
+.os-navbar .nav-link {
+
+    color: #08192B;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    padding: 10px 13px !important;
+
+    position: relative;
+
+    transition:
+        color .3s ease;
+
+}
+
+
+/* Hover */
+
+.os-navbar .nav-link:hover {
+
+    color: #B37D37;
+
+}
+
+
+/* Active */
+
+.os-navbar .nav-link.active {
+
+    color: #B37D37;
+
+    font-weight: 600;
+
+}
+
+
+/* Active underline */
+
+.os-navbar .nav-link.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+
+    right: 13px;
+
+    bottom: 3px;
+
+    height: 2px;
+
+    background: #B37D37;
+
+    border-radius: 10px;
+
+}
+
+
+/* Get a Quote button */
+
+.os-navbar-cta {
+
+    background: #455123 !important;
+
+    border-color: #455123 !important;
+
+    color: #F5F7FA !important;
+
+    font-weight: 600;
+
+    padding: 10px 18px;
+
+    border-radius: 6px;
+
+    transition:
+        background-color .3s ease,
+        border-color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.os-navbar-cta:hover {
+
+    background: #B37D37 !important;
+
+    border-color: #B37D37 !important;
+
+    color: #fff !important;
+
+    transform: translateY(-2px);
+
+}
+
+
+/* Navbar shadow while scrolling */
+
+.os-navbar.is-scrolled {
+
+    box-shadow:
+        0 8px 30px rgba(8, 25, 43, .12) !important;
+
+}
+
+
+/* ==================================================
+   NAVBAR RESPONSIVE
+================================================== */
+
+@media (max-width: 991.98px) {
+
+    .os-navbar .navbar-brand strong {
+
+        font-size: 16px;
+
+    }
+
+
+    .os-navbar .navbar-logo {
+
+        max-height: 50px;
+
+    }
+
+
+    .os-navbar .navbar-collapse {
+
+        padding-top: 15px;
+
+    }
+
+
+    .os-navbar .nav-link {
+
+        padding:
+            10px 0 !important;
+
+    }
+
+
+    .os-navbar .nav-link.active::after {
+
+        left: 0;
+
+        right: auto;
+
+        width: 35px;
+
+        bottom: 3px;
+
+    }
+
+
+    .os-navbar-cta {
+
+        display: inline-block;
+
+        margin-top: 8px;
+
+    }
+
+}
+
+/* ==================================================
+   OMNISPHERE GLOBAL FOOTER
+================================================== */
+
+.os-footer {
+
+    background: #F5F7FA !important;
+
+    color: #F5F7FA;
+
+}
+
+
+.os-footer .footer-logo {
+
+    max-width: 150px;
+
+    height: auto;
+
+    object-fit: contain;
+
+}
+
+
+.os-footer h4 {
+
+    color: #08192B;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+}
+
+
+.os-footer h5 {
+
+    color: #08192B;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+}
+
+
+.os-footer p {
+
+    color: #08192B;
+
+    line-height: 1.7;
+
+}
+
+
+.os-footer a {
+    color: #08192B !important;
+    transition: color .3s ease;
+
+}
+
+
+.os-footer a:hover {
+
+    color: #C4A574 !important;
+
+}
+
+
+.os-footer .social-icons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.os-footer .social-icons a {
+
+    width: 40px;
+
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,.18);
+
+    border-radius: 50%;
+
+    color: #08192B;
+
+    text-decoration: none;
+
+    transition:
+        background-color .3s ease,
+        border-color .3s ease,
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+
+.os-footer .social-icons a:hover {
+
+    background: #C4A574;
+
+    border-color: #C4A574;
+
+    color: #FFFFFF !important;
+
+    transform: translateY(-3px);
+
+}
+
+
+.os-footer hr {
+
+    opacity: .15;
+
+}
+
+
+@media (max-width: 767.98px) {
+
+    .os-footer {
+
+        text-align: center;
+
+    }
+
+
+    .os-footer .social-icons {
+
+        justify-content: center;
+
+    }
+
+
+    .os-footer .footer-logo {
+
+        max-width: 135px;
+
+    }
+
+}/* =========================================================
+   OMNISPHERE ARCHITECTURE
+   GLOBAL FRONTEND FOUNDATION
+   ========================================================= */
+
+/* =========================================================
+   01. DESIGN TOKENS
+   ========================================================= */
+
+:root {
+
+    --os-primary: #4A8BE2;
+    --os-primary-dark: #465F87;
+
+    --os-navy: #08192B;
+
+    --os-gold: #C4A574;
+    --os-gold-dark: #B37D37;
+
+    --os-olive: #455123;
+
+    --os-bg: #F8F9FB;
+    --os-bg-soft: #F5F7FA;
+
+    --os-white: #FFFFFF;
+
+    --os-text: #08192B;
+    --os-text-soft: #465F87;
+    --os-muted: #667085;
+
+    --os-border: #E7EBF0;
+
+    --os-radius-sm: 6px;
+    --os-radius-md: 12px;
+    --os-radius-lg: 18px;
+
+    --os-shadow-sm:
+        0 4px 15px rgba(8, 25, 43, .06);
+
+    --os-shadow-md:
+        0 10px 30px rgba(8, 25, 43, .08);
+
+    --os-shadow-lg:
+        0 20px 50px rgba(8, 25, 43, .12);
+
+    --os-transition:
+        all .3s ease;
+
+}
+
+
+/* =========================================================
+   02. GLOBAL RESET / BASE
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+
+    font-family: 'Poppins', sans-serif;
+
+    color: var(--os-text);
+
+    background: var(--os-white);
+
+    line-height: 1.7;
+
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    transition: var(--os-transition);
+}
+
+button,
+.btn {
+    transition: var(--os-transition);
+}
+
+::selection {
+    background: var(--os-gold);
+    color: var(--os-white);
+}
+
+
+/* =========================================================
+   03. GLOBAL TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--os-text);
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+p {
+    color: var(--os-muted);
+}
+
+.text-primary {
+    color: var(--os-primary) !important;
+}
+
+.text-dark {
+    color: var(--os-text) !important;
+}
+
+
+/* =========================================================
+   04. GLOBAL SECTION SYSTEM
+   ========================================================= */
+
+.os-section {
+    padding: 100px 0;
+}
+
+.os-section-light {
+    background: var(--os-bg);
+}
+
+.os-section-white {
+    background: var(--os-white);
+}
+
+.os-section-dark {
+    background: var(--os-navy);
+}
+
+.os-section-header {
+    max-width: 760px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.os-section-eyebrow {
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: var(--os-gold-dark);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.os-section-title {
+    margin-bottom: 18px;
+
+    font-size: 42px;
+    font-weight: 700;
+
+    color: var(--os-text);
+}
+
+.os-section-description {
+    max-width: 700px;
+    margin: 0 auto;
+
+    color: var(--os-muted);
+
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   05. GLOBAL BUTTONS
+   ========================================================= */
+
+.btn-primary {
+    background: var(--os-olive) !important;
+    border-color: var(--os-olive) !important;
+
+    color: var(--os-white) !important;
+
+    font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: var(--os-gold-dark) !important;
+    border-color: var(--os-gold-dark) !important;
+
+    color: var(--os-white) !important;
+
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    color: var(--os-olive) !important;
+    border-color: var(--os-olive) !important;
+}
+
+.btn-outline-primary:hover {
+    background: var(--os-olive) !important;
+    border-color: var(--os-olive) !important;
+
+    color: var(--os-white) !important;
+
+    transform: translateY(-2px);
+}
+
+.os-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 48px;
+
+    padding: 11px 22px;
+
+    border-radius: var(--os-radius-sm);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: var(--os-transition);
+}
+
+.os-btn-primary {
+    background: var(--os-olive);
+    color: var(--os-white);
+
+    border: 1px solid var(--os-olive);
+}
+
+.os-btn-primary:hover {
+    background: var(--os-gold-dark);
+    border-color: var(--os-gold-dark);
+
+    color: var(--os-white);
+
+    transform: translateY(-2px);
+}
+
+.os-btn-gold {
+    background: var(--os-gold-dark);
+    color: var(--os-white);
+
+    border: 1px solid var(--os-gold-dark);
+}
+
+.os-btn-gold:hover {
+    background: var(--os-olive);
+    border-color: var(--os-olive);
+
+    color: var(--os-white);
+
+    transform: translateY(-2px);
+}
+
+.os-btn-outline {
+    background: transparent;
+
+    color: var(--os-olive);
+
+    border: 1px solid var(--os-olive);
+}
+
+.os-btn-outline:hover {
+    background: var(--os-olive);
+
+    color: var(--os-white);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   06. GLOBAL CARD SYSTEM
+   ========================================================= */
+
+.os-card {
+    background: var(--os-white);
+
+    border: 1px solid var(--os-border);
+
+    border-radius: var(--os-radius-lg);
+
+    box-shadow: var(--os-shadow-sm);
+
+    overflow: hidden;
+
+    transition: var(--os-transition);
+}
+
+.os-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: var(--os-shadow-md);
+
+    border-color: rgba(196, 165, 116, .45);
+}
+
+
+/* =========================================================
+   07. NAVBAR
+   Supports existing .navbar AND future .os-navbar
+   ========================================================= */
+
+.navbar,
+.os-navbar {
+
+    background: var(--os-white) !important;
+
+    padding: 15px 0;
+
+    transition:
+        background-color .3s ease,
+        box-shadow .3s ease,
+        padding .3s ease;
+
+    z-index: 1000;
+}
+
+.navbar-logo,
+.os-navbar .navbar-logo {
+
+    width: auto;
+
+    max-height: 58px;
+
+    object-fit: contain;
+}
+
+.navbar-brand strong,
+.os-navbar .navbar-brand strong {
+
+    color: var(--os-text);
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: .2px;
+}
+
+.navbar-brand small,
+.os-navbar .navbar-brand small {
+
+    color: var(--os-muted) !important;
+
+    font-size: 11px;
+
+    line-height: 1.3;
+}
+
+.navbar .nav-link,
+.os-navbar .nav-link {
+
+    position: relative;
+
+    padding: 10px 13px !important;
+
+    color: var(--os-text) !important;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition: color .3s ease;
+}
+
+.navbar .nav-link:hover,
+.os-navbar .nav-link:hover {
+
+    color: var(--os-gold-dark) !important;
+}
+
+.navbar .nav-link.active,
+.os-navbar .nav-link.active {
+
+    color: var(--os-gold-dark) !important;
+
+    font-weight: 600;
+}
+
+.navbar .nav-link.active::after,
+.os-navbar .nav-link.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+    right: 13px;
+
+    bottom: 3px;
+
+    height: 2px;
+
+    background: var(--os-gold-dark);
+
+    border-radius: 20px;
+}
+
+
+/* Navbar CTA */
+
+.navbar .btn-primary,
+.os-navbar-cta {
+
+    padding: 10px 18px;
+
+    border-radius: var(--os-radius-sm);
+
+    font-weight: 600;
+}
+
+
+/* Navbar after scrolling */
+
+.navbar.is-scrolled,
+.os-navbar.is-scrolled {
+
+    box-shadow:
+        0 8px 30px rgba(8, 25, 43, .12);
+}
+
+
+/* =========================================================
+   08. FOOTER
+   Supports existing .footer AND .os-footer
+   ========================================================= */
+
+.footer,
+.os-footer {
+
+    background: var(--os-bg-soft) !important;
+
+    color: var(--os-text);
+
+    border-top: 1px solid var(--os-border);
+}
+
+.footer .footer-logo,
+.os-footer .footer-logo {
+
+    width: auto;
+
+    max-width: 150px;
+
+    max-height: 90px;
+
+    object-fit: contain;
+}
+
+.footer h4,
+.footer h5,
+.os-footer h4,
+.os-footer h5 {
+
+    color: var(--os-text) !important;
+
+    font-weight: 600;
+}
+
+.footer p,
+.os-footer p {
+
+    color: var(--os-text-soft) !important;
+
+    line-height: 1.8;
+}
+
+.footer a,
+.os-footer a {
+
+    color: var(--os-text-soft) !important;
+
+    text-decoration: none;
+
+    transition: var(--os-transition);
+}
+
+.footer a:hover,
+.os-footer a:hover {
+
+    color: var(--os-gold-dark) !important;
+}
+
+
+/* Social icons */
+
+.social-icons,
+.os-footer .social-icons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.social-icons a,
+.os-footer .social-icons a {
+
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--os-border);
+
+    border-radius: 50%;
+
+    background: var(--os-white);
+
+    color: var(--os-text) !important;
+
+    text-decoration: none;
+
+    transition: var(--os-transition);
+}
+
+.social-icons a:hover,
+.os-footer .social-icons a:hover {
+
+    background: var(--os-gold);
+
+    border-color: var(--os-gold);
+
+    color: var(--os-white) !important;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   09. GLOBAL FORM ELEMENTS
+   ========================================================= */
+
+.form-control,
+.form-select {
+
+    min-height: 48px;
+
+    border: 1px solid var(--os-border);
+
+    border-radius: var(--os-radius-sm);
+
+    color: var(--os-text);
+
+    background: var(--os-white);
+
+    box-shadow: none;
+
+    transition: var(--os-transition);
+}
+
+textarea.form-control {
+
+    min-height: 140px;
+
+    resize: vertical;
+}
+
+.form-control:focus,
+.form-select:focus {
+
+    border-color: var(--os-gold);
+
+    box-shadow:
+        0 0 0 3px rgba(196, 165, 116, .15);
+}
+
+
+/* =========================================================
+   10. PAGE HERO / INNER PAGE HEADER
+   ========================================================= */
+
+.os-page-hero {
+
+    padding: 90px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--os-bg),
+            var(--os-bg-soft)
+        );
+
+    text-align: center;
+}
+
+.os-page-hero .eyebrow {
+
+    color: var(--os-gold-dark);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+}
+
+.os-page-hero h1 {
+
+    margin: 12px 0 15px;
+
+    color: var(--os-text);
+
+    font-size: 48px;
+
+    font-weight: 700;
+}
+
+.os-page-hero p {
+
+    max-width: 720px;
+
+    margin: 0 auto;
+
+    color: var(--os-muted);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   11. WHATSAPP FLOATING BUTTON
+   ========================================================= */
+
+.os-whatsapp-float {
+
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    width: 56px;
+    height: 56px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #25D366;
+
+    color: #fff !important;
+
+    font-size: 25px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, .18);
+
+    z-index: 999;
+
+    transition: var(--os-transition);
+}
+
+.os-whatsapp-float:hover {
+
+    color: #fff !important;
+
+    transform: translateY(-4px) scale(1.04);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, .22);
+}
+
+
+/* =========================================================
+   12. ACCESSIBILITY
+   ========================================================= */
+
+a:focus-visible,
+button:focus-visible,
+.btn:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible {
+
+    outline: 3px solid rgba(196, 165, 116, .45);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   13. RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+    .os-section {
+        padding: 75px 0;
+    }
+
+    .section-title,
+    .os-section-title {
+
+        font-size: 36px;
+    }
+
+    .navbar .navbar-collapse,
+    .os-navbar .navbar-collapse {
+
+        padding-top: 15px;
+    }
+
+    .navbar .nav-link,
+    .os-navbar .nav-link {
+
+        padding: 10px 0 !important;
+    }
+
+    .navbar .nav-link.active::after,
+    .os-navbar .nav-link.active::after {
+
+        left: 0;
+        right: auto;
+
+        width: 35px;
+    }
+
+    .navbar .btn-primary,
+    .os-navbar-cta {
+
+        display: inline-block;
+
+        margin-top: 8px;
+    }
+
+    .os-page-hero {
+
+        padding: 70px 0;
+    }
+
+    .os-page-hero h1 {
+
+        font-size: 40px;
+    }
+
+}
+
+@media (max-width: 767.98px) {
+
+    .os-section {
+
+        padding: 60px 0;
+    }
+
+    .os-section-header {
+
+        margin-bottom: 40px;
+    }
+
+    .os-section-title,
+    .section-title {
+
+        font-size: 32px;
+    }
+
+    .os-page-hero {
+
+        padding: 60px 0;
+    }
+
+    .os-page-hero h1 {
+
+        font-size: 34px;
+    }
+
+    .footer,
+    .os-footer {
+
+        text-align: center;
+    }
+
+    .social-icons,
+    .os-footer .social-icons {
+
+        justify-content: center;
+    }
+
+    .os-whatsapp-float {
+
+        width: 50px;
+        height: 50px;
+
+        right: 16px;
+        bottom: 16px;
+
+        font-size: 22px;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+
+    .os-section {
+
+        padding: 50px 0;
+    }
+
+    .os-section-title,
+    .section-title {
+
+        font-size: 28px;
+    }
+
+    .os-page-hero h1 {
+
+        font-size: 30px;
+    }
+
+    .os-btn {
+
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   OMNISPHERE PORTFOLIO
+   HOMEPAGE FEATURED PROJECTS
+   ========================================================= */
+
+.os-portfolio-card {
+
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: var(--os-white);
+
+    border: 1px solid var(--os-border);
+
+    border-radius: var(--os-radius-lg);
+
+    box-shadow: var(--os-shadow-sm);
+
+    transition: var(--os-transition);
+
+}
+
+.os-portfolio-card:hover {
+
+    transform: translateY(-7px);
+
+    box-shadow: var(--os-shadow-md);
+
+    border-color: rgba(196, 165, 116, .45);
+
+}
+
+
+/* =========================================================
+   PROJECT IMAGE
+   ========================================================= */
+
+.os-portfolio-image {
+
+    position: relative;
+
+    display: block;
+
+    height: 280px;
+
+    overflow: hidden;
+
+    background: var(--os-bg-soft);
+
+}
+
+.os-portfolio-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform .6s ease;
+
+}
+
+.os-portfolio-card:hover
+.os-portfolio-image img {
+
+    transform: scale(1.06);
+
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+   ========================================================= */
+
+.os-portfolio-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(8, 25, 43, .35);
+
+    opacity: 0;
+
+    transition: var(--os-transition);
+
+}
+
+.os-portfolio-card:hover
+.os-portfolio-overlay {
+
+    opacity: 1;
+
+}
+
+.os-portfolio-overlay i {
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--os-gold);
+
+    color: var(--os-white);
+
+    font-size: 20px;
+
+    transform: translateY(10px);
+
+    transition: var(--os-transition);
+
+}
+
+.os-portfolio-card:hover
+.os-portfolio-overlay i {
+
+    transform: translateY(0);
+
+}
+
+
+/* =========================================================
+   PROJECT CONTENT
+   ========================================================= */
+
+.os-portfolio-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+    padding: 25px;
+
+}
+
+.os-portfolio-category {
+
+    display: inline-block;
+
+    margin-bottom: 9px;
+
+    color: var(--os-gold-dark);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 1.2px;
+
+    text-transform: uppercase;
+
+}
+
+.os-portfolio-title {
+
+    margin: 0 0 10px;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    line-height: 1.35;
+
+}
+
+.os-portfolio-title a {
+
+    color: var(--os-text);
+
+    text-decoration: none;
+
+}
+
+.os-portfolio-title a:hover {
+
+    color: var(--os-gold-dark);
+
+}
+
+.os-portfolio-description {
+
+    margin-bottom: 18px;
+
+    color: var(--os-muted);
+
+    font-size: 14px;
+
+    line-height: 1.75;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+
+    -webkit-box-orient: vertical;
+
+    overflow: hidden;
+
+}
+
+
+/* =========================================================
+   PROJECT META
+   ========================================================= */
+
+.os-portfolio-meta {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+
+    padding-top: 15px;
+
+    margin-top: auto;
+
+    border-top: 1px solid var(--os-border);
+
+    color: var(--os-text-soft);
+
+    font-size: 12px;
+
+}
+
+.os-portfolio-meta span {
+
+    display: inline-flex;
+
+    align-items: center;
+
+}
+
+.os-portfolio-meta i {
+
+    color: var(--os-gold-dark);
+
+}
+
+
+/* =========================================================
+   VIEW PROJECT LINK
+   ========================================================= */
+
+.os-portfolio-link {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    width: fit-content;
+
+    margin-top: 18px;
+
+    color: var(--os-olive);
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+}
+
+.os-portfolio-link i {
+
+    transition: transform .3s ease;
+
+}
+
+.os-portfolio-link:hover {
+
+    color: var(--os-gold-dark);
+
+}
+
+.os-portfolio-link:hover i {
+
+    transform: translateX(5px);
+
+}
+
+
+/* =========================================================
+   EMPTY PORTFOLIO STATE
+   ========================================================= */
+
+.os-portfolio-empty {
+
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    padding: 55px 30px;
+
+    text-align: center;
+
+    background: var(--os-white);
+
+    border: 1px dashed var(--os-border);
+
+    border-radius: var(--os-radius-lg);
+
+}
+
+.os-portfolio-empty-icon {
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    background: var(--os-bg-soft);
+
+    color: var(--os-gold-dark);
+
+    font-size: 28px;
+
+}
+
+.os-portfolio-empty h3 {
+
+    margin-bottom: 10px;
+
+    font-size: 24px;
+
+}
+
+.os-portfolio-empty p {
+
+    margin: 0;
+
+    color: var(--os-muted);
+
+}
+
+
+/* =========================================================
+   PORTFOLIO RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+    .os-portfolio-image {
+
+        height: 240px;
+
+    }
+
+    .os-portfolio-content {
+
+        padding: 22px;
+
+    }
+
+    .os-portfolio-title {
+
+        font-size: 20px;
+
+    }
+
+}

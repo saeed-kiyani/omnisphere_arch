@@ -5,6 +5,9 @@ if (!defined('SITE_URL')) {
     exit('Direct access not allowed.');
 }
 
+// SEO helpers
+require_once __DIR__ . '/../functions/seo.php';
+
 // Website Settings
 $settings = getSettings();
 
@@ -14,6 +17,19 @@ $pageTitle = $pageTitle ?? pageTitle();
 $metaDescription = $metaDescription ?? $settings['meta_description'];
 
 $metaKeywords = $metaKeywords ?? $settings['meta_keywords'];
+
+/*
+|--------------------------------------------------------------------------
+| Canonical URL
+|--------------------------------------------------------------------------
+*/
+
+$currentPath = parse_url(
+    $_SERVER['REQUEST_URI'] ?? '/',
+    PHP_URL_PATH
+);
+
+$canonicalUrl = rtrim(SITE_URL, '/') . $currentPath;
 
 // Logo & Favicon
 $logo = !empty($settings['logo'])
@@ -54,6 +70,36 @@ content="<?= e($settings['company_name']); ?>">
 <meta
 name="robots"
 content="index, follow">
+
+<link
+    rel="canonical"
+    href="<?= e($canonicalUrl); ?>">
+
+    <!-- Open Graph -->
+
+<meta
+    property="og:type"
+    content="website">
+
+<meta
+    property="og:title"
+    content="<?= e($pageTitle); ?>">
+
+<meta
+    property="og:description"
+    content="<?= e($metaDescription); ?>">
+
+<meta
+    property="og:url"
+    content="<?= e($canonicalUrl); ?>">
+
+<meta
+    property="og:site_name"
+    content="<?= e($settings['company_name'] ?? SITE_NAME); ?>">
+
+<meta
+    property="og:image"
+    content="<?= e($logo); ?>">
 
 <link
 rel="icon"
