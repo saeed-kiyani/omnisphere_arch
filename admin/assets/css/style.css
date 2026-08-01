@@ -539,3 +539,256 @@ line-height:12px;
 transition:width .7s ease;
 
 }
+
+/* =========================================
+   FINAL DASHBOARD POLISH
+========================================= */
+
+.content {
+    padding: 24px 30px 40px;
+}
+
+.content > .row {
+    margin-top: 20px !important;
+}
+
+.dashboard-card {
+    border: 1px solid #edf1f7;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.dashboard-card .card-header {
+    padding: 16px 20px;
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+}
+
+.dashboard-card .card-body {
+    padding: 20px;
+}
+
+.stat-card {
+    padding: 24px 20px;
+    border-radius: 16px;
+}
+
+.stat-icon {
+    width: 62px;
+    height: 62px;
+    margin-bottom: 14px;
+}
+
+.stat-icon i {
+    font-size: 27px;
+}
+
+.stat-card h2 {
+    font-size: 34px;
+    margin-bottom: 5px;
+}
+
+.stat-card h6 {
+    font-size: 16px;
+}
+
+.stat-card small {
+    font-size: 12px;
+}
+
+.dashboard-card canvas {
+    max-width: 100%;
+}
+
+.dashboard-card .card-body canvas {
+    display: block;
+}
+
+#contentChart,
+#leadSummaryChart,
+#leadSourcesChart {
+    max-height: 330px;
+}
+
+.pipeline-item {
+    margin-bottom: 18px;
+}
+
+.pipeline-stage {
+    font-size: 14px;
+}
+
+.pipeline-progress {
+    height: 10px;
+    background: #edf2f7;
+}
+
+.pipeline-progress .progress-bar {
+    min-width: 3px;
+    font-size: 9px;
+    line-height: 10px;
+}
+
+.dashboard-card table th {
+    padding: 12px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+
+.dashboard-card table td {
+    padding: 12px 16px;
+    font-size: 13px;
+}
+
+.dashboard-card table tbody tr {
+    transition: background .2s ease;
+}
+
+.dashboard-card table tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+.quick-card {
+    padding: 22px 14px;
+    border-radius: 15px;
+}
+
+.quick-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 14px;
+}
+
+.quick-icon i {
+    font-size: 25px;
+}
+
+.quick-card h5 {
+    font-size: 15px;
+}
+
+.quick-card p {
+    font-size: 11px;
+}
+
+
+.overview-table td {
+    padding: 9px 4px;
+    font-size: 13px;
+}
+
+.overview-table td:first-child {
+    color: #64748b;
+    font-weight: 500;
+}
+
+.overview-table td:last-child {
+    color: #1e293b;
+    font-weight: 600;
+    text-align: right;
+}
+
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid #edf1f7;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-item > i {
+    font-size: 18px;
+    margin-top: 2px;
+}
+
+.activity-item strong {
+    display: block;
+    font-size: 13px;
+    color: #1e293b;
+    margin-bottom: 3px;
+}
+
+.activity-item small {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+}
+
+
+/* =========================================
+   RESPONSIVE DASHBOARD
+========================================= */
+
+@media (max-width: 991px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
+    .stat-card h2 {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 767px) {
+
+    .sidebar {
+        width: 0;
+        overflow: hidden;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .dashboard-card .card-header {
+        font-size: 15px;
+        padding: 13px 15px;
+    }
+
+    .dashboard-card .card-body {
+        padding: 15px;
+    }
+
+    .stat-card {
+        padding: 20px 15px;
+    }
+
+    .stat-icon {
+        width: 55px;
+        height: 55px;
+    }
+
+    .stat-card h2 {
+        font-size: 28px;
+    }
+
+    .quick-card {
+        padding: 20px 10px;
+    }
+
+    .dashboard-card table {
+        font-size: 12px;
+    }
+
+}
