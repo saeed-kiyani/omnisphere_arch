@@ -23,7 +23,7 @@ include '../includes/topbar.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-<h2>Blog Categories</h2>
+<h3>Blog Categories</h3>
 
 <a href="create.php" class="btn btn-primary add-btn">
 

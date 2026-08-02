@@ -6,112 +6,178 @@ ini_set('display_errors', 1);
 require_once '../../config/config.php';
 require_once '../includes/auth-check.php';
 
-// ===========================
-// CSV Headers
-// ===========================
 
-$filename = "contact_leads_" . date("Y-m-d_H-i-s") . ".csv";
+// =========================================================
+// CSV File Name
+// =========================================================
+
+$filename = "contact_leads_" . date("Y-m-d_H-i-s") . ".xlsx";
+
+
+// =========================================================
+// CSV Headers
+// =========================================================
 
 header('Content-Type: text/csv; charset=utf-8');
-header('Content-Disposition: attachment; filename="'.$filename.'"');
 
-// ===========================
+header(
+    'Content-Disposition: attachment; filename="' . $filename . '"'
+);
+
+header('Pragma: no-cache');
+
+header('Expires: 0');
+
+
+// =========================================================
 // Open Output Stream
-// ===========================
+// =========================================================
 
 $output = fopen('php://output', 'w');
 
-// ===========================
+
+// =========================================================
 // CSV Header Row
-// ===========================
+// =========================================================
 
 fputcsv($output, [
 
-'ID',
+    'ID',
 
-'Full Name',
+    'Full Name',
 
-'Email',
+    'Email',
 
-'Phone',
+    'Phone',
 
-'Service',
+    'Service',
 
-'Subject',
+    'Subject',
 
-'Message',
+    'Message',
 
-'Budget',
+    'Budget',
 
-'Project Location',
+    'Project Location',
 
-'Status',
+    'City',
 
-'Notes',
+    'Country',
 
-'Created At'
+    'Source',
+
+    'Status',
+
+    'Notes',
+
+    'Created At',
+
+    'Updated At'
 
 ]);
 
-// ===========================
+
+// =========================================================
 // Fetch Leads
-// ===========================
+// =========================================================
 
 $sql = "
 
-SELECT
+    SELECT
 
-contact_leads.*,
+        contact_leads.*,
 
-services.title AS service_name
+        services.title AS service_name
 
-FROM contact_leads
+    FROM contact_leads
 
-LEFT JOIN services
+    LEFT JOIN services
 
-ON contact_leads.service_id = services.id
+        ON contact_leads.service_id = services.id
 
-ORDER BY contact_leads.created_at DESC
+    ORDER BY
+
+        contact_leads.created_at DESC
 
 ";
 
+
 $stmt = $pdo->query($sql);
 
-// ===========================
+
+// =========================================================
 // Write CSV Rows
-// ===========================
+// =========================================================
 
 while ($lead = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
     fputcsv($output, [
 
+        // ID
         $lead['id'],
 
+        // Client
         $lead['full_name'],
 
+        // Email
         $lead['email'],
 
+        // Phone
         $lead['phone'],
 
-        $lead['service_name'],
+        // Service
+        $lead['service_name'] ?? '',
 
-        $lead['subject'],
+        // Subject
+        $lead['subject'] ?? '',
 
-        preg_replace("/\r|\n/", " ", $lead['message']),
+        // Message
+        preg_replace(
+            "/\r|\n/",
+            " ",
+            $lead['message'] ?? ''
+        ),
 
-        $lead['budget'],
+        // Budget
+        $lead['budget'] ?? '',
 
-        $lead['project_location'],
+        // Project Location
+        $lead['project_location'] ?? '',
 
-        $lead['status'],
+        // City
+        $lead['city'] ?? '',
 
-        preg_replace("/\r|\n/", " ", $lead['notes']),
+        // Country
+        $lead['country'] ?? '',
 
-        $lead['created_at']
+        // Source
+        $lead['source'] ?? '',
+
+        // Status
+        $lead['status'] ?? '',
+
+        // Internal Notes
+        preg_replace(
+            "/\r|\n/",
+            " ",
+            $lead['notes'] ?? ''
+        ),
+
+        // Created
+        $lead['created_at'] ?? '',
+
+        // Updated
+        $lead['updated_at'] ?? ''
 
     ]);
 
 }
 
+
+// =========================================================
+// Close Stream
+// =========================================================
+
 fclose($output);
+
 exit;

@@ -4,19 +4,58 @@
    Dashboard Statistics
 =========================== */
 
-$portfolioCount = $pdo->query("SELECT COUNT(*) FROM portfolio")->fetchColumn();
+$portfolioCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM portfolio
+")->fetchColumn();
 
-$serviceCount = $pdo->query("SELECT COUNT(*) FROM services")->fetchColumn();
 
-$blogCount = $pdo->query("SELECT COUNT(*) FROM blog")->fetchColumn();
+$serviceCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM services
+")->fetchColumn();
 
-$categoryCount = $pdo->query("SELECT COUNT(*) FROM blog_categories")->fetchColumn();
 
-$teamCount = $pdo->query("SELECT COUNT(*) FROM team")->fetchColumn();
+$blogCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM blog
+")->fetchColumn();
 
-$testimonialCount = $pdo->query("SELECT COUNT(*) FROM testimonials")->fetchColumn();
 
-$leadCount = $pdo->query("SELECT COUNT(*) FROM contact_leads")->fetchColumn();
+$categoryCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM blog_categories
+")->fetchColumn();
+
+
+$teamCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM team
+")->fetchColumn();
+
+
+$testimonialCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM testimonials
+")->fetchColumn();
+
+
+$leadCount = $pdo->query("
+    SELECT COUNT(*)
+    FROM contact_leads
+")->fetchColumn();
+
+
+/* ===========================
+   Total Blog Views
+=========================== */
+
+$blogViews = $pdo->query("
+    SELECT COALESCE(SUM(views), 0)
+    FROM blog
+")->fetchColumn();
+
+$blogViews = (int) $blogViews;
 
 /* Website Status */
 
@@ -241,5 +280,85 @@ foreach($leadSources as $row){
     $sourceLabels[] = $row['source'];
 
     $sourceTotals[] = (int)$row['total'];
+
+}
+
+
+/* =========================================================
+   STEP 8F — CLIENT LOCATION ANALYTICS
+========================================================= */
+
+/*
+|--------------------------------------------------------------------------
+| Top Client Countries
+|--------------------------------------------------------------------------
+*/
+
+$countryStmt = $pdo->query("
+    SELECT
+        TRIM(country) AS country,
+        COUNT(*) AS total
+    FROM contact_leads
+    WHERE country IS NOT NULL
+      AND TRIM(country) != ''
+    GROUP BY TRIM(country)
+    ORDER BY total DESC, country ASC
+    LIMIT 8
+");
+
+$clientCountries = $countryStmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+/*
+|--------------------------------------------------------------------------
+| Top Client Cities
+|--------------------------------------------------------------------------
+*/
+
+$cityStmt = $pdo->query("
+    SELECT
+        TRIM(city) AS city,
+        COUNT(*) AS total
+    FROM contact_leads
+    WHERE city IS NOT NULL
+      AND TRIM(city) != ''
+    GROUP BY TRIM(city)
+    ORDER BY total DESC, city ASC
+    LIMIT 8
+");
+
+$clientCities = $cityStmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+/*
+|--------------------------------------------------------------------------
+| Prepare Country Chart Data
+|--------------------------------------------------------------------------
+*/
+
+$countryLabels = [];
+$countryTotals = [];
+
+foreach ($clientCountries as $row) {
+
+    $countryLabels[] = $row['country'];
+    $countryTotals[] = (int) $row['total'];
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Prepare City Chart Data
+|--------------------------------------------------------------------------
+*/
+
+$cityLabels = [];
+$cityTotals = [];
+
+foreach ($clientCities as $row) {
+
+    $cityLabels[] = $row['city'];
+    $cityTotals[] = (int) $row['total'];
 
 }

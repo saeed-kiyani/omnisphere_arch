@@ -34,7 +34,7 @@ $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h2>Portfolio Projects</h2>
+        <h3>Portfolio Projects</h3>
 
         <a href="create.php" class="btn btn-primary add-btn">
             + Add New Project

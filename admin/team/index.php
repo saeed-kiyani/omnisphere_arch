@@ -23,7 +23,7 @@ include '../includes/topbar.php';
 
 <div class="d-flex justify-content-between align-items-center mb-4">
 
-<h2>Team Members</h2>
+<h3>Team Members</h3>
 
 <a href="create.php" class="btn btn-primary add-btn">
 <i class="bi bi-plus-circle"></i>

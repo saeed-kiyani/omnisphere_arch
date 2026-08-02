@@ -6,6 +6,134 @@ ini_set('display_errors', 1);
 require_once '../config/config.php';
 require_once '../includes/functions.php';
 
+/*
+|--------------------------------------------------------------------------
+| Detect Visitor IP
+|--------------------------------------------------------------------------
+*/
+
+function getVisitorIP(): ?string
+{
+    $ip = $_SERVER['REMOTE_ADDR'] ?? null;
+
+    if (!$ip) {
+        return null;
+    }
+
+    /*
+    Do not trust X-Forwarded-For automatically.
+    REMOTE_ADDR is the actual peer connected to PHP.
+    */
+
+    if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+        return null;
+    }
+
+    return $ip;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Check Whether IP Is Public
+|--------------------------------------------------------------------------
+*/
+
+function isPublicIP(string $ip): bool
+{
+    return filter_var(
+        $ip,
+        FILTER_VALIDATE_IP,
+        FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+    ) !== false;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Get Location From IP
+|--------------------------------------------------------------------------
+*/
+
+function getIPLocation(?string $ip): array
+{
+    if (!$ip || !isPublicIP($ip)) {
+
+        return [
+            'country' => null,
+            'city' => null
+        ];
+
+    }
+
+    $url = "https://ipapi.co/" . rawurlencode($ip) . "/json/";
+
+    $ch = curl_init($url);
+
+    curl_setopt_array($ch, [
+
+        CURLOPT_RETURNTRANSFER => true,
+
+        CURLOPT_FOLLOWLOCATION => true,
+
+        CURLOPT_CONNECTTIMEOUT => 2,
+
+        CURLOPT_TIMEOUT => 4,
+
+        CURLOPT_SSL_VERIFYPEER => true,
+
+        CURLOPT_SSL_VERIFYHOST => 2,
+
+        CURLOPT_HTTPHEADER => [
+            'Accept: application/json',
+            'User-Agent: OmniSphereArchitecture/1.0'
+        ]
+
+    ]);
+
+    $response = curl_exec($ch);
+
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    curl_close($ch);
+
+    if (
+        $response === false ||
+        $httpCode < 200 ||
+        $httpCode >= 300
+    ) {
+
+        return [
+            'country' => null,
+            'city' => null
+        ];
+
+    }
+
+    $data = json_decode($response, true);
+
+    if (!is_array($data)) {
+
+        return [
+            'country' => null,
+            'city' => null
+        ];
+
+    }
+
+    return [
+
+        'country' => !empty($data['country_name'])
+            ? trim($data['country_name'])
+            : null,
+
+        'city' => !empty($data['city'])
+            ? trim($data['city'])
+            : null
+
+    ];
+}
+
 
 // =========================================================
 // Only POST Requests
@@ -58,6 +186,33 @@ $project_location = trim($_POST['project_location'] ?? '');
 $country = trim($_POST['country'] ?? '');
 
 $city = trim($_POST['city'] ?? '');
+
+/*
+|--------------------------------------------------------------------------
+| Automatic IP Location Detection
+|--------------------------------------------------------------------------
+*/
+
+$visitorIP = getVisitorIP();
+
+$ipLocation = getIPLocation($visitorIP);
+
+$detectedCountry = $ipLocation['country'];
+$detectedCity    = $ipLocation['city'];
+
+/*
+|--------------------------------------------------------------------------
+| Final Client Location
+|--------------------------------------------------------------------------
+*/
+
+$country = !empty($detectedCountry)
+    ? $detectedCountry
+    : (!empty($manual_country) ? $manual_country : null);
+
+$city = !empty($detectedCity)
+    ? $detectedCity
+    : (!empty($manual_city) ? $manual_city : null);
 
 
 // =========================================================
@@ -139,6 +294,22 @@ $source = 'Website';
 
 $status = 'New';
 
+
+$visitorIP = getVisitorIP();
+
+$ipLocation = getIPLocation($visitorIP);
+
+$detectedCountry = $ipLocation['country'];
+$detectedCity    = $ipLocation['city'];
+
+
+$country = !empty($detectedCountry)
+    ? $detectedCountry
+    : (!empty($_POST['country']) ? trim($_POST['country']) : null);
+
+$city = !empty($detectedCity)
+    ? $detectedCity
+    : (!empty($_POST['city']) ? trim($_POST['city']) : null);
 
 // =========================================================
 // Insert Lead

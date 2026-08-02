@@ -21,7 +21,7 @@ $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="d-flex justify-content-between align-items-center mb-4">
 
-        <h2>Services</h2>
+        <h3>Services</h3>
 
         <a href="create.php" class="btn btn-primary add-btn">
             + Add New Service

@@ -792,3 +792,40 @@ transition:width .7s ease;
     }
 
 }
+
+/* =========================================================
+   Lead Source Pipeline
+========================================================= */
+
+.source-pipeline-item {
+    width: 100%;
+}
+
+.source-pipeline-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #08192B;
+}
+
+.source-pipeline-label i {
+    font-size: 6px;
+    color: #4A8BE2;
+}
+
+.source-pipeline-progress {
+    height: 8px;
+    background: #edf1f5;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.source-pipeline-progress .progress-bar {
+    background: #4A8BE2;
+    border-radius: 10px;
+    transition: width 0.7s ease;
+}
+
+.source-pipeline-item strong {
+    font-size: 13px;
+    color: #08192B;
+}

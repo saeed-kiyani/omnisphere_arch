@@ -437,29 +437,253 @@ Top Requested Services
 
 </div>
 
-<div class="row mt-4">
+<!-- =========================================================
+     LEAD SOURCES + LEAD SOURCE PIPELINE
+========================================================= -->
 
-<div class="col-lg-12">
+<div class="row mt-4 g-4">
 
-<div class="card dashboard-card">
+    <!-- Lead Sources -->
 
-<div class="card-header" style="color: #08192B;">
+    <div class="col-lg-6 mb-4">
 
-<i class="bi bi-share me-2"></i>
+        <div class="card dashboard-card h-100">
 
-Lead Sources
+            <div class="card-header" style="color: #08192B;">
+
+                <i class="bi bi-share me-2"></i>
+
+                Lead Sources
+
+            </div>
+
+            <div class="card-body">
+
+                <div
+    style="
+        height: 320px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    "
+>
+    <canvas id="leadSourcesChart"></canvas>
+</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Lead Source Pipeline -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header" style="color: #08192B;">
+
+                <i class="bi bi-bar-chart-line me-2"></i>
+
+                Lead Source Pipeline
+
+            </div>
+
+            <div class="card-body">
+
+                <?php
+
+                $sourcePipelineTotal = array_sum($sourceTotals);
+
+                ?>
+
+                <?php if ($sourcePipelineTotal > 0): ?>
+
+                    <?php foreach ($sourceLabels as $index => $source): ?>
+
+                        <?php
+
+                        $sourceCount = (int) ($sourceTotals[$index] ?? 0);
+
+                        $sourcePercent = $sourcePipelineTotal > 0
+                            ? round(($sourceCount / $sourcePipelineTotal) * 100)
+                            : 0;
+
+                        ?>
+
+                        <div class="source-pipeline-item mb-3">
+
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+
+                                <span class="source-pipeline-label">
+
+                                    <i class="bi bi-circle-fill me-2"></i>
+
+                                    <?= e($source); ?>
+
+                                </span>
+
+                                <strong>
+
+                                    <?= $sourceCount; ?>
+
+                                </strong>
+
+                            </div>
+
+                            <div class="progress source-pipeline-progress">
+
+                                <div
+                                    class="progress-bar"
+                                    role="progressbar"
+                                    style="width: <?= $sourcePercent; ?>%;"
+                                    aria-valuenow="<?= $sourcePercent; ?>"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100">
+
+                                    <?php if ($sourcePercent > 8): ?>
+
+                                        <?= $sourcePercent; ?>%
+
+                                    <?php endif; ?>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <?php endforeach; ?>
+
+                <?php else: ?>
+
+                    <div class="text-center text-muted py-5">
+
+                        <i class="bi bi-bar-chart fs-2 d-block mb-2"></i>
+
+                        No lead source data available.
+
+                    </div>
+
+                <?php endif; ?>
+
+
+                <hr>
+
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <strong>Total Leads</strong>
+
+                    <strong>
+
+                        <?= $sourcePipelineTotal; ?>
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
-<div class="card-body">
+<!-- =========================================================
+     STEP 8F — CLIENT LOCATION ANALYTICS
+========================================================= -->
 
-<canvas id="leadSourcesChart"></canvas>
+<div class="row mt-2 g-4">
 
-</div>
+    <!-- Top Client Countries -->
 
-</div>
+    <div class="col-lg-6 mb-4">
 
-</div>
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header" style="color: #08192B;">
+
+                <i class="bi bi-globe2 me-2"></i>
+
+                Top Client Countries
+
+            </div>
+
+            <div class="card-body">
+
+                <?php if (!empty($clientCountries)): ?>
+
+                    <div style="height: 300px;">
+
+                        <canvas id="clientCountriesChart"></canvas>
+
+                    </div>
+
+                <?php else: ?>
+
+                    <div class="text-center text-muted py-5">
+
+                        <i class="bi bi-globe2 fs-2 d-block mb-2"></i>
+
+                        No country data available yet.
+
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Top Client Cities -->
+
+    <div class="col-lg-6 mb-4">
+
+        <div class="card dashboard-card h-100">
+
+            <div class="card-header" style="color: #08192B;">
+
+                <i class="bi bi-buildings me-2"></i>
+
+                Top Client Cities
+
+            </div>
+
+            <div class="card-body">
+
+                <?php if (!empty($clientCities)): ?>
+
+                    <div style="height: 300px;">
+
+                        <canvas id="clientCitiesChart"></canvas>
+
+                    </div>
+
+                <?php else: ?>
+
+                    <div class="text-center text-muted py-5">
+
+                        <i class="bi bi-buildings fs-2 d-block mb-2"></i>
+
+                        No city data available yet.
+
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -1473,15 +1697,17 @@ data:<?= json_encode($sourceTotals) ?>,
 
 backgroundColor:[
 
-'#374DDA',
+'#455123', //WEBSITE
 
-'#57F175',
+'#25D366', //WHATSAPP
 
-'#1773EA',
+'#1877F2', //FACEBOOK
 
-'#0E72A3',
+'#F58529', //INSTAGRAM
 
-'#0A66C2'
+'#0A66C2', //LINKEDIN
+
+'red' //GOOGLE
 
 ],
 
@@ -1508,6 +1734,179 @@ position:'bottom'
 }
 
 });
+
+/* =========================================================
+   STEP 8F — CLIENT COUNTRIES
+========================================================= */
+
+<?php if (!empty($clientCountries)): ?>
+
+const clientCountriesChart = new Chart(
+
+    document.getElementById('clientCountriesChart'),
+
+    {
+
+        type: 'bar',
+
+        data: {
+
+            labels: <?= json_encode($countryLabels); ?>,
+
+            datasets: [{
+
+                label: 'Clients',
+
+                data: <?= json_encode($countryTotals); ?>,
+
+                backgroundColor: '#4A8BE2',
+
+                borderRadius: 8,
+
+                barThickness: 24
+
+            }]
+
+        },
+
+        options: {
+
+            indexAxis: 'y',
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        precision: 0
+
+                    }
+
+                },
+
+                y: {
+
+                    grid: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+<?php endif; ?>
+
+
+/* =========================================================
+   STEP 8F — CLIENT CITIES
+========================================================= */
+
+<?php if (!empty($clientCities)): ?>
+
+const clientCitiesChart = new Chart(
+
+    document.getElementById('clientCitiesChart'),
+
+    {
+
+        type: 'bar',
+
+        data: {
+
+            labels: <?= json_encode($cityLabels); ?>,
+
+            datasets: [{
+
+                label: 'Clients',
+
+                data: <?= json_encode($cityTotals); ?>,
+
+                backgroundColor: '#B37D37',
+
+                borderRadius: 8,
+
+                barThickness: 24
+
+            }]
+
+        },
+
+        options: {
+
+            indexAxis: 'y',
+
+            responsive: true,
+
+            maintainAspectRatio: false,
+
+            plugins: {
+
+                legend: {
+
+                    display: false
+
+                }
+
+            },
+
+            scales: {
+
+                x: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        precision: 0
+
+                    }
+
+                },
+
+                y: {
+
+                    grid: {
+
+                        display: false
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+);
+
+<?php endif; ?>
 
 </script>
 
