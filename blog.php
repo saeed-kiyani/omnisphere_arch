@@ -219,12 +219,12 @@ include 'includes/navbar.php';
             class="os-page-hero-content"
             data-aos="fade-up">
 
-            <span class="os-section-eyebrow">
+            <span class="os-section-eyebrow" style="color: #B37D37">
                 OmniSphere Insights
             </span>
 
-            <h1>
-                Architecture & Design Blog
+            <h1 style="color: #F5F7FA;">
+                Our <span style="color: #B37D37">Blogs</span>
             </h1>
 
             <p>

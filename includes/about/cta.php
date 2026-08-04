@@ -10,7 +10,7 @@
                 Let's Create Together
             </span>
 
-            <h2>
+            <h2 style="color: #F5F7FA">
                 Have a Project in Mind?
             </h2>
 

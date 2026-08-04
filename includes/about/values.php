@@ -10,7 +10,7 @@
                 Our Values
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123">
                 Principles Behind Our Work
             </h2>
 

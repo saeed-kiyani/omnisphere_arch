@@ -74,8 +74,8 @@ $portfolioProjects = $portfolioStmt->fetchAll(PDO::FETCH_ASSOC);
                 Our Portfolio
             </span>
 
-            <h1 class="os-section-title">
-                Our Projects
+            <h1 class="os-section-title" style="color: #F5F7FA;">
+                Our <span style="color: #B37D37">Projects</span>
             </h1>
 
             <p class="os-section-description">
@@ -309,7 +309,7 @@ $portfolioProjects = $portfolioStmt->fetchAll(PDO::FETCH_ASSOC);
                 Start Your Project
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #F5F7FA">
                 Have a Project in Mind?
             </h2>
 

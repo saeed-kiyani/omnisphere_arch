@@ -265,7 +265,7 @@ $projectImageAlt = $project['title'];
             <?php endif; ?>
 
 
-            <h1 class="os-section-title">
+            <h1 class="os-section-title" style="color: #F5F7FA;">
 
                 <?= e($project['title']); ?>
 
@@ -274,7 +274,7 @@ $projectImageAlt = $project['title'];
 
             <?php if (!empty($project['short_description'])): ?>
 
-                <p class="os-section-description">
+                <p class="os-section-description" style="color: #B37D37;">
 
                     <?= e($project['short_description']); ?>
 
@@ -349,7 +349,7 @@ $projectImageAlt = $project['title'];
                     </span>
 
 
-                    <h2 class="os-project-info-title">
+                    <h2 class="os-project-info-title" style="color: #455123;">
 
                         <?= e($project['title']); ?>
 
@@ -358,7 +358,7 @@ $projectImageAlt = $project['title'];
 
                     <?php if (!empty($project['description'])): ?>
 
-                        <div class="os-project-description">
+                        <div class="os-project-description" style="color: #08192B;">
 
                             <?= nl2br(e($project['description'])); ?>
 
@@ -576,7 +576,7 @@ $projectImageAlt = $project['title'];
 
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123">
 
                 Explore the Project
 
@@ -669,7 +669,7 @@ $projectImageAlt = $project['title'];
 
             <a
                 href="<?= SITE_URL; ?>/portfolio.php"
-                class="os-btn os-btn-secondary">
+                class="os-btn os-btn-secondary" style="color: #B37D37;">
 
                 <i class="bi bi-arrow-left me-2"></i>
 
@@ -703,7 +703,7 @@ $projectImageAlt = $project['title'];
             </span>
 
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #F5F7FA">
 
                 Ready to Create Something Exceptional?
 

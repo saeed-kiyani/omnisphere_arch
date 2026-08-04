@@ -90,9 +90,9 @@ include 'includes/navbar.php';
             </span>
 
 
-            <h1 class="os-section-title">
+            <h1 class="os-section-title" style="color: #F5F7FA;">
 
-                Our Architectural Services
+                Our <span style="color: #B37D37">Services</span>
 
             </h1>
 
@@ -140,7 +140,7 @@ include 'includes/navbar.php';
 
                     $serviceImage = !empty($service['thumbnail'])
     ? upload('services/' . $service['thumbnail'])
-    : asset('images/service-placeholder.jpg');
+    : asset('images/service-placeholder.g');
 
 
                     /*
@@ -357,7 +357,7 @@ include 'includes/navbar.php';
             </span>
 
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #F5F7FA">
 
                 Have a Project in Mind?
 

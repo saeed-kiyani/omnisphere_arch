@@ -6,13 +6,13 @@
             class="os-page-hero-content"
             data-aos="fade-up">
 
-            <span class="os-section-eyebrow">
+            <span class="os-section-eyebrow" style="color: #B37D37">
                 About OmniSphere
             </span>
 
-            <h1>
+            <h1 style="color: #F5F7FA;">
                 Designing Spaces That
-                <span>Inspire & Endure</span>
+                <span style="color: #B37D37">Inspire & Endure</span>
             </h1>
 
             <p>

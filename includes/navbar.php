@@ -158,7 +158,7 @@ Navbar Start
                 <li class="nav-item ms-lg-3 mt-3 mt-lg-0">
 
                     <a
-    href="https://wa.me/923339266678<?= preg_replace('/[^0-9]/', '', setting('whatsapp')); ?>"
+    href="https://wa.me/<?= preg_replace('/[^0-9]/', '', setting('whatsapp')); ?>"
     target="_blank"
     rel="noopener noreferrer"
     class="btn btn-primary os-navbar-cta"

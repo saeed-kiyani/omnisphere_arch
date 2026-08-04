@@ -56,11 +56,11 @@ $latestBlogPosts = $latestBlogStmt->fetchAll(PDO::FETCH_ASSOC);
                 From Our Blog
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123">
                 Latest Insights
             </h2>
 
-            <p class="os-section-description">
+            <p class="os-section-description" style="color: #08192B">
 
                 Explore the latest ideas, insights and
                 inspiration from OmniSphere Architecture.

@@ -8,11 +8,11 @@
                 Our Direction
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title"  style="color: #455123">
                 What Drives Us
             </h2>
 
-            <p class="os-section-description">
+            <p class="os-section-description" style="color: #08192B">
                 Our approach is guided by creativity, functionality,
                 quality and a commitment to our clients.
             </p>
@@ -36,11 +36,11 @@
 
                     </div>
 
-                    <h3>
+                    <h3 style="color: #455123">
                         Our Mission
                     </h3>
 
-                    <p>
+                    <p style="color: #08192B">
                         To provide thoughtful architectural and design
                         solutions that balance aesthetics, functionality
                         and the unique needs of every client.
@@ -66,11 +66,11 @@
 
                     </div>
 
-                    <h3>
+                    <h3 style="color: #455123">
                         Our Vision
                     </h3>
 
-                    <p>
+                    <p style="color: #08192B">
                         To become a trusted architectural design partner
                         known for innovative ideas, professional execution
                         and spaces that create lasting value.

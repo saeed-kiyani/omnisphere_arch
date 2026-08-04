@@ -51,11 +51,11 @@ $testimonials = $testimonialStmt->fetchAll(PDO::FETCH_ASSOC);
                 Client Testimonials
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123;">
                 What Our Clients Say
             </h2>
 
-            <p class="os-section-description">
+            <p class="os-section-description" style="color: #08192B;">
 
                 We believe great design is built on trust,
                 communication and a commitment to excellence.

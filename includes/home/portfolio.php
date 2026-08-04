@@ -58,11 +58,11 @@ $featuredPortfolio = $portfolioStmt->fetchAll(PDO::FETCH_ASSOC);
                 Our Portfolio
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123;">
                 Selected Projects
             </h2>
 
-            <p class="os-section-description">
+            <p class="os-section-description" style="color: #08192B">
 
                 Explore a selection of architectural,
                 interior and design projects created

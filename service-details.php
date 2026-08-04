@@ -279,7 +279,7 @@ include 'includes/navbar.php';
             </span>
 
 
-            <h1>
+            <h1 style="color: #F5F7FA;">
 
                 <?= e($service['title']); ?>
 
@@ -288,7 +288,7 @@ include 'includes/navbar.php';
 
             <?php if (!empty($service['short_description'])): ?>
 
-                <p>
+                <p style="color: #F5F7FA;">
 
                     <?= e($service['short_description']); ?>
 
@@ -329,7 +329,7 @@ include 'includes/navbar.php';
                 </span>
 
 
-                <h2 class="os-section-title">
+                <h2 class="os-section-title" style="color: #455123;">
 
                     <?= e($service['title']); ?>
 
@@ -338,7 +338,7 @@ include 'includes/navbar.php';
 
                 <?php if (!empty($service['description'])): ?>
 
-                    <div class="os-service-detail-description">
+                    <div class="os-service-detail-description" style="color: #08192B;">
 
                         <?= $service['description']; ?>
 
@@ -369,14 +369,14 @@ include 'includes/navbar.php';
                 <div class="os-service-detail-sidebar">
 
 
-                    <div class="os-service-detail-sidebar-icon">
+                    <div class="os-service-detail-sidebar-icon" style="color: #B37D37">
 
                         <i class="<?= e($serviceIcon); ?>"></i>
 
                     </div>
 
 
-                    <h3>
+                    <h3 style="color: #455123">
 
                         Need This Service?
 
@@ -453,7 +453,7 @@ include 'includes/navbar.php';
             </span>
 
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123">
 
                 Related Projects
 
@@ -663,7 +663,7 @@ include 'includes/navbar.php';
             </span>
 
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #F5F7FA">
 
                 Ready to Start Your Project?
 
