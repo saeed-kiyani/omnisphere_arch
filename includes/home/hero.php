@@ -1,65 +1,73 @@
 <section class="hero-section">
 
-    <div class="container">
+    <!-- Full Hero Background Video -->
+    <div class="hero-video-wrapper">
 
-        <div class="row align-items-center min-vh-100">
+        <video
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            poster="<?= asset('images/hero.png'); ?>"
+        >
+            <source
+                src="<?= asset('videos/architectural-construction.mp4'); ?>"
+                type="video/mp4"
+            >
 
-            <div class="col-lg-6" data-aos="fade-right">
+            Your browser does not support the video tag.
+        </video>
+
+    </div>
+
+    <!-- Dark / Soft Overlay -->
+    <div class="hero-overlay"></div>
+
+
+    <!-- Hero Content -->
+    <div class="container hero-content">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-8" data-aos="fade-right">
 
                 <span class="hero-subtitle">
-
                     Welcome to
-
                 </span>
 
                 <h1 class="hero-title">
-
                     <?= e(setting('company_name')); ?>
-
                 </h1>
 
                 <p class="hero-tagline">
-
                     <?= e(setting('tagline')); ?>
-
                 </p>
 
                 <p class="hero-description">
-
                     We create innovative architecture, stunning interiors,
-                    inspiring exteriors, and realistic 3D visualizations that
-                    transform ideas into extraordinary spaces.
-
+                    inspiring exteriors, and realistic 3D visualizations
+                    that transform ideas into extraordinary spaces.
                 </p>
 
                 <div class="hero-buttons">
 
                     <a
                         href="<?= SITE_URL; ?>/portfolio.php"
-                        class="btn btn-primary btn-lg">
-
+                        class="btn btn-primary btn-lg"
+                    >
                         View Portfolio
-
                     </a>
 
                     <a
                         href="<?= SITE_URL; ?>/contact.php"
-                        class="btn btn-outline-primary btn-lg">
-
+                        class="btn btn-outline-light btn-lg"
+                    >
                         Get Free Consultation
-
                     </a>
 
                 </div>
-
-            </div>
-
-            <div class="col-lg-6 text-center" data-aos="fade-left">
-
-                <img
-                    src="<?= asset('images/hero.png'); ?>"
-                    alt="Hero Image"
-                    class="img-fluid hero-image">
 
             </div>
 
