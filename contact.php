@@ -100,12 +100,12 @@ if (isset($_GET['error'])) {
             class="os-page-hero-content"
             data-aos="fade-up">
 
-            <span class="os-section-eyebrow">
+            <span class="os-section-eyebrow" style="color: #B37D37">
                 Get In Touch
             </span>
 
-            <h1>
-                Let's Discuss Your Project
+            <h1 style="color: #F5F7FA;">
+                Let's Discuss Your <span style="color: #B37D37">Project</span>
             </h1>
 
             <p>
@@ -161,7 +161,7 @@ if (isset($_GET['error'])) {
                         Contact OmniSphere
                     </span>
 
-                    <h2 class="os-section-title">
+                    <h2 class="os-section-title" style="color: #455123">
                         Let's Create Something Exceptional
                     </h2>
 
@@ -333,7 +333,7 @@ if (isset($_GET['error'])) {
                             Project Inquiry
                         </span>
 
-                        <h3>
+                        <h3 style="color: #455123">
                             Tell Us About Your Project
                         </h3>
 
@@ -634,7 +634,7 @@ if (isset($_GET['error'])) {
 
 <?php
 
-$googleMap = setting('google_map');
+$googleMap = setting('google_map_iframe');
 
 ?>
 
@@ -644,15 +644,15 @@ $googleMap = setting('google_map');
 
     <div class="container">
 
-        <div
-            class="os-map-wrapper"
-            data-aos="fade-up">
+    <div
+        class="os-map-wrapper"
+        data-aos="fade-up">
 
-            <?= $googleMap; ?>
-
-        </div>
+        <?= $settings['google_map_iframe']; ?>
 
     </div>
+
+</div>
 
 </section>
 

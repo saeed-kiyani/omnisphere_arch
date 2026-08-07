@@ -209,7 +209,7 @@ include 'includes/navbar.php';
 
             <?php if (!empty($post['category_title'])): ?>
 
-                <span class="os-section-eyebrow">
+                <span class="os-section-eyebrow" style="color: #F5F7FA;">
 
                     <?= e($post['category_title']); ?>
 
@@ -217,7 +217,13 @@ include 'includes/navbar.php';
 
             <?php endif; ?>
 
-            <h1>
+            <h1 style="
+    background: linear-gradient(90deg, #455123 0%, #B37D37 45%, #F5F7FA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
 
                 <?= e($post['title']); ?>
 
@@ -326,7 +332,7 @@ include 'includes/navbar.php';
                             OmniSphere Architecture
                         </span>
 
-                        <h3>
+                        <h3 style="color: #455123;">
                             Architecture. Design. Innovation.
                         </h3>
 
@@ -355,7 +361,7 @@ include 'includes/navbar.php';
 
                         <div class="os-blog-sidebar-card">
 
-                            <h3>
+                            <h3 style="color: #455123;">
                                 Category
                             </h3>
 

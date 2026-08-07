@@ -88,15 +88,15 @@ include 'includes/navbar.php';
             class="os-page-hero-content"
             data-aos="fade-up">
 
-            <span class="os-section-eyebrow">
+            <span class="os-section-eyebrow" style="color: #B37D37">
 
                 Our Team
 
             </span>
 
-            <h1>
+            <h1 style="color: #F5F7FA;">
 
-                Meet the People Behind Our Work
+                Meet the People <span style="color: #B37D37">Behind Our Work</span>
 
             </h1>
 
@@ -136,7 +136,7 @@ include 'includes/navbar.php';
 
             </span>
 
-            <h2 class="os-section-title">
+            <h2 class="os-section-title" style="color: #455123">
 
                 Our Creative Professionals
 

@@ -20,6 +20,4 @@ include 'includes/navbar.php';
 
 <?php include 'includes/about/values.php'; ?>
 
-<?php include 'includes/about/cta.php'; ?>
-
 <?php include 'includes/footer.php'; ?>

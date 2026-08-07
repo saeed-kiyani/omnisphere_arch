@@ -256,7 +256,7 @@ $projectImageAlt = $project['title'];
 
             <?php if (!empty($project['service_title'])): ?>
 
-                <span class="os-section-eyebrow">
+                <span class="os-section-eyebrow" style="color: #F5F7FA;">
 
                     <?= e($project['service_title']); ?>
 
@@ -265,7 +265,13 @@ $projectImageAlt = $project['title'];
             <?php endif; ?>
 
 
-            <h1 class="os-section-title" style="color: #F5F7FA;">
+            <h1 class="os-section-title" style="
+    background: linear-gradient(90deg, #455123 0%, #B37D37 45%, #F5F7FA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
 
                 <?= e($project['title']); ?>
 
@@ -274,7 +280,7 @@ $projectImageAlt = $project['title'];
 
             <?php if (!empty($project['short_description'])): ?>
 
-                <p class="os-section-description" style="color: #B37D37;">
+                <p class="os-section-description" style="color: #F5F7FA;">
 
                     <?= e($project['short_description']); ?>
 

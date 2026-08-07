@@ -132,13 +132,19 @@ include 'includes/navbar.php';
             class="os-page-hero-content"
             data-aos="fade-up">
 
-            <span class="os-section-eyebrow">
+            <span class="os-section-eyebrow" style="color: #F5F7FA;">
 
                 <?= e($member['designation']); ?>
 
             </span>
 
-            <h1>
+            <h1 style="
+    background: linear-gradient(90deg, #455123 0%, #B37D37 45%, #F5F7FA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
 
                 <?= e($member['full_name']); ?>
 
@@ -200,7 +206,7 @@ include 'includes/navbar.php';
 
                 </span>
 
-                <h2 class="os-section-title">
+                <h2 class="os-section-title" style="color: #455123;">
 
                     <?= e($member['full_name']); ?>
 

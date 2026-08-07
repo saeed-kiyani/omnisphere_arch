@@ -63,3 +63,31 @@ define('UPLOAD_PATH', 'uploads/');
 */
 
 date_default_timezone_set('Asia/Karachi');
+
+// =========================================================
+// Gmail SMTP Configuration
+// =========================================================
+
+define('SMTP_HOST', 'smtp.gmail.com');
+
+define('SMTP_PORT', 465);
+
+define(
+    'SMTP_USERNAME',
+    'omnispherearchitecture@gmail.com'
+);
+
+define(
+    'SMTP_PASSWORD',
+    'tahzwrvvxddeykuw'
+);
+
+define(
+    'SMTP_FROM_EMAIL',
+    'omnispherearchitecture@gmail.com'
+);
+
+define(
+    'SMTP_FROM_NAME',
+    'OmniSphere Architecture'
+);

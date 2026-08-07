@@ -5,6 +5,10 @@ ini_set('display_errors', 1);
 
 require_once '../config/config.php';
 require_once '../includes/functions.php';
+require_once '../vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 /*
 |--------------------------------------------------------------------------
@@ -365,83 +369,751 @@ $stmt->execute([
 
 $leadId = $pdo->lastInsertId();
 
-
 // =========================================================
-// Email Notification
+// Email Notification - PHPMailer / Gmail SMTP
 // =========================================================
 
-$adminEmail = ADMIN_EMAIL;
+try {
 
-$emailSubject = "New Website Lead #".$leadId." | OmniSphere Architecture";
+    $mail = new PHPMailer(true);
 
-$emailBody = "
+    // -----------------------------------------------------
+    // SMTP Server Settings
+    // -----------------------------------------------------
 
-New Project Inquiry Received
+    $mail->isSMTP();
 
-Lead ID: #{$leadId}
+    $mail->Host = SMTP_HOST;
 
-----------------------------------------
+    $mail->SMTPAuth = true;
 
-Name:
-{$full_name}
+    $mail->Username = SMTP_USERNAME;
 
-Email:
-{$email}
+    $mail->Password = SMTP_PASSWORD;
 
-Phone:
-{$phone}
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
 
-Service:
-{$service['title']}
+    $mail->Port = SMTP_PORT;
 
-Subject:
-{$subject}
+    // UTF-8
+    $mail->CharSet = 'UTF-8';
 
-Budget:
-{$budget}
 
-Project Location:
-{$project_location}
+    // -----------------------------------------------------
+    // Sender
+    // -----------------------------------------------------
 
-Country:
-{$country}
+    $mail->setFrom(
+        SMTP_FROM_EMAIL,
+        SMTP_FROM_NAME
+    );
 
-City:
-{$city}
 
-----------------------------------------
+    // -----------------------------------------------------
+    // Admin / Business Email
+    // -----------------------------------------------------
 
-Project Details:
+    $mail->addAddress(
+        ADMIN_EMAIL,
+        'OmniSphere Architecture'
+    );
 
-{$message}
 
-----------------------------------------
+    // -----------------------------------------------------
+    // Reply-To
+    // -----------------------------------------------------
 
-Source:
-Website
+    $mail->addReplyTo(
+        $email,
+        $full_name
+    );
 
-Status:
-New
+
+    // -----------------------------------------------------
+    // Email Subject
+    // -----------------------------------------------------
+
+    $mail->Subject =
+        "New Website Lead #{$leadId} | OmniSphere Architecture";
+
+
+    // -----------------------------------------------------
+    // HTML Email
+    // -----------------------------------------------------
+
+    $mail->isHTML(true);
+
+
+    $mail->Body = "
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset='UTF-8'>
+
+<meta
+    name='viewport'
+    content='width=device-width, initial-scale=1.0'
+>
+
+<meta
+    name='x-apple-disable-message-reformatting'
+>
+
+<title>New Project Inquiry</title>
+
+</head>
+
+
+<body style='
+    margin:0;
+    padding:0;
+    width:100%;
+    background:#f4f6f1;
+    font-family:Arial,Helvetica,sans-serif;
+    color:#24301c;
+'>
+
+
+<!-- Outer wrapper -->
+
+<div style='
+    width:100%;
+    background:#f4f6f1;
+    padding:20px 10px;
+    box-sizing:border-box;
+'>
+
+
+    <!-- Main card -->
+
+    <div style='
+        width:100%;
+        max-width:620px;
+        margin:0 auto;
+        background:#ffffff;
+        border:1px solid #e2e7dc;
+        border-radius:14px;
+        overflow:hidden;
+        box-sizing:border-box;
+    '>
+
+
+        <!-- ================================================= -->
+        <!-- HEADER -->
+        <!-- ================================================= -->
+
+        <div style='
+            background:#435522;
+            padding:28px 22px;
+            text-align:center;
+            box-sizing:border-box;
+        '>
+
+            <div style='
+                font-size:22px;
+                line-height:30px;
+                font-weight:bold;
+                color:#ffffff;
+            '>
+
+                New Project Inquiry
+
+            </div>
+
+
+            <div style='
+                margin-top:6px;
+                font-size:14px;
+                line-height:22px;
+                color:#e9eedf;
+            '>
+
+                OmniSphere Architecture
+
+            </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- LEAD ID -->
+        <!-- ================================================= -->
+
+        <div style='
+            padding:22px;
+            box-sizing:border-box;
+        '>
+
+            <div style='
+                background:#f3f6ed;
+                border:1px solid #e0e7d5;
+                border-radius:10px;
+                padding:16px;
+                text-align:center;
+                box-sizing:border-box;
+            '>
+
+                <div style='
+                    font-size:12px;
+                    line-height:18px;
+                    color:#777777;
+                    text-transform:uppercase;
+                    letter-spacing:1px;
+                '>
+
+                    Lead ID
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:22px;
+                    line-height:30px;
+                    font-weight:bold;
+                    color:#435522;
+                '>
+
+                    #{$leadId}
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- INTRO -->
+            <!-- ================================================= -->
+
+            <div style='
+                margin-top:22px;
+                font-size:15px;
+                line-height:24px;
+                color:#4c5548;
+            '>
+
+                A new project inquiry has been submitted
+                through the OmniSphere Architecture website.
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SECTION TITLE -->
+            <!-- ================================================= -->
+
+            <div style='
+                margin-top:28px;
+                margin-bottom:14px;
+                font-size:18px;
+                line-height:25px;
+                font-weight:bold;
+                color:#435522;
+            '>
+
+                Client Information
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- NAME -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Name
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                    word-break:break-word;
+                '>
+
+                    " . e($full_name) . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- EMAIL -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Email
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    overflow-wrap:anywhere;
+                    word-break:break-word;
+                '>
+
+                    <a
+                        href='mailto:" . e($email) . "'
+                        style='
+                            color:#49668a;
+                            text-decoration:none;
+                            overflow-wrap:anywhere;
+                            word-break:break-word;
+                        '
+                    >
+
+                        " . e($email) . "
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- PHONE -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Phone / WhatsApp
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                '>
+
+                    " . e($phone) . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SERVICE -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Service
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                    word-break:break-word;
+                '>
+
+                    " . e($service['title']) . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- SUBJECT -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Subject
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                    word-break:break-word;
+                '>
+
+                    " . e($subject ?: 'Not provided') . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- BUDGET -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Estimated Budget
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                    word-break:break-word;
+                '>
+
+                    " . e($budget ?: 'Not provided') . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- PROJECT LOCATION -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Project Location
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                    word-break:break-word;
+                '>
+
+                    " . e(
+                        $project_location ?: 'Not provided'
+                    ) . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- COUNTRY -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    Country
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                '>
+
+                    " . e(
+                        $country ?: 'Not detected'
+                    ) . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- CITY -->
+            <!-- ================================================= -->
+
+            <div style='
+                padding:14px 0;
+                border-bottom:1px solid #eeeeee;
+            '>
+
+                <div style='
+                    font-size:11px;
+                    line-height:16px;
+                    color:#8a927f;
+                    text-transform:uppercase;
+                    letter-spacing:.7px;
+                '>
+
+                    City
+
+                </div>
+
+
+                <div style='
+                    margin-top:4px;
+                    font-size:15px;
+                    line-height:23px;
+                    color:#20271c;
+                    overflow-wrap:anywhere;
+                '>
+
+                    " . e(
+                        $city ?: 'Not detected'
+                    ) . "
+
+                </div>
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- PROJECT DETAILS -->
+            <!-- ================================================= -->
+
+            <div style='
+                margin-top:28px;
+                margin-bottom:14px;
+                font-size:18px;
+                line-height:25px;
+                font-weight:bold;
+                color:#435522;
+            '>
+
+                Project Details
+
+            </div>
+
+
+            <div style='
+                width:100%;
+                box-sizing:border-box;
+                background:#fafbf8;
+                border:1px solid #e1e6dc;
+                border-radius:10px;
+                padding:18px;
+                font-size:15px;
+                line-height:25px;
+                color:#3e463a;
+                overflow-wrap:anywhere;
+                word-break:break-word;
+            '>
+
+                " . nl2br(e($message)) . "
+
+            </div>
+
+
+            <!-- ================================================= -->
+            <!-- STATUS -->
+            <!-- ================================================= -->
+
+            <div style='
+                margin-top:25px;
+                padding:16px;
+                background:#f7f8f5;
+                border-radius:10px;
+                font-size:13px;
+                line-height:23px;
+                color:#62695c;
+            '>
+
+                <strong>Source:</strong> Website
+
+                <br>
+
+                <strong>Status:</strong> New
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- FOOTER -->
+        <!-- ================================================= -->
+
+        <div style='
+            padding:20px 22px;
+            background:#f1f3ed;
+            border-top:1px solid #e2e6dd;
+            text-align:center;
+            box-sizing:border-box;
+        '>
+
+            <div style='
+                font-size:14px;
+                line-height:22px;
+                font-weight:bold;
+                color:#435522;
+            '>
+
+                OmniSphere Architecture
+
+            </div>
+
+
+            <div style='
+                margin-top:3px;
+                font-size:12px;
+                line-height:20px;
+                color:#73796e;
+            '>
+
+                Build Ideas Into Reality
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>
 
 ";
 
 
-$emailHeaders = [];
+    // -----------------------------------------------------
+    // Plain Text Alternative
+    // -----------------------------------------------------
 
-$emailHeaders[] = "From: OmniSphere Architecture <" . ADMIN_EMAIL . ">";
-
-$emailHeaders[] = "Reply-To: " . $email;
-
-$emailHeaders[] = "Content-Type: text/plain; charset=UTF-8";
+    $mail->AltBody = $emailBody;
 
 
-@mail(
-    $adminEmail,
-    $emailSubject,
-    $emailBody,
-    implode("\r\n", $emailHeaders)
-);
+    // -----------------------------------------------------
+    // Send
+    // -----------------------------------------------------
 
+    $mail->send();
+
+
+} catch (Exception $e) {
+
+    // Email failure should NOT delete the lead.
+
+    error_log(
+        'OmniSphere Email Error: ' .
+        $e->getMessage()
+    );
+
+}
 
 // =========================================================
 // Redirect

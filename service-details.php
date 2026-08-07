@@ -279,7 +279,13 @@ include 'includes/navbar.php';
             </span>
 
 
-            <h1 style="color: #F5F7FA;">
+            <h1 style="
+    background: linear-gradient(90deg, #F5F7FA 0%, #B37D37 45%, #08192B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  ">
 
                 <?= e($service['title']); ?>
 
